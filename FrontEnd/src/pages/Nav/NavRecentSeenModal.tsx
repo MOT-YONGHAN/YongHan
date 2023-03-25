@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function NavRecentSeenModal({ onOpenRecentModal }: any) {
     return (
         <div className="h-full w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-70 text-center">

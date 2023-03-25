@@ -3,7 +3,7 @@ import "./index.css";
 import Nav from "./pages/Nav/Nav";
 import Main from "./pages/Main";
 import Detail from "./pages/Detail";
-import ProductList from "./pages/ProductList";
+import ProductList from "./pages/ProductList/ProductList";
 
 function Router() {
     return (

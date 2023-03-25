@@ -1,4 +1,3 @@
-import React from "react";
 import { Login } from "../../api/firebase";
 
 export default function NavLoginModal({ onOpenLoginModal }: any) {
