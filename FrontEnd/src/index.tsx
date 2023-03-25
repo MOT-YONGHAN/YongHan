@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import Router from "./Router";
 import store from "./modules";
-import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement,

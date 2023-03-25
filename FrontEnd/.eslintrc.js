@@ -1,4 +1,4 @@
-exports = {
+module.exports = {
     env: {
         browser: true,
         es6: true,
@@ -10,6 +10,7 @@ exports = {
     parserOptions: {
         project: "./tsconfig.json",
     },
+    ignorePatterns: [".eslintrc.js"],
     extends: [
         "airbnb", // or airbnb-base
         "plugin:react/recommended",
@@ -21,6 +22,7 @@ exports = {
         "plugin:prettier/recommended",
     ],
     rules: {
+        "no-var": "warn", // var 금지
         "no-multiple-empty-lines": "warn", // 여러 줄 공백 금지
         "no-console": ["warn", { allow: ["warn", "error"] }], // console.log() 금지
         eqeqeq: "warn", // 일치 연산자 사용 필수
