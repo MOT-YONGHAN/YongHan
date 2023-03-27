@@ -8,7 +8,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint", "prettier", "import", "react-hooks"],
     parserOptions: {
-        project: "./tsconfig.json",
+        project: ["./tsconfig.json", "tailwind.config.js"],
     },
     ignorePatterns: [".eslintrc.js"],
     extends: [
