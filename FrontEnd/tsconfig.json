@@ -24,6 +24,6 @@
         "noImplicitAny": true, //any 타입 경고
         "strictNullChecks": true //nullChecks
     },
-    "include": ["src", "tailwind.config.js"],
+    "include": ["src", "tailwind.config.js", "postcss.config.js"],
     "exclude": ["node_modules", ".eslintrc.js"]
 }

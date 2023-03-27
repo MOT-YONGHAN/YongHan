@@ -8,9 +8,9 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint", "prettier", "import", "react-hooks"],
     parserOptions: {
-        project: ["./tsconfig.json", "tailwind.config.js"],
+        project: ["./tsconfig.json", "postcss.config.js", "tailwind.config.js"],
     },
-    ignorePatterns: [".eslintrc.js"],
+    ignorePatterns: [".eslintrc.js", "postcss.config.js"],
     extends: [
         "airbnb", // or airbnb-base
         "plugin:react/recommended",
