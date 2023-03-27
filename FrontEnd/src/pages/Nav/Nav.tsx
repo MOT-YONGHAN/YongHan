@@ -8,21 +8,21 @@ function Nav() {
         setIsLoginModal((prev) => !prev);
     };
     return (
-        <div className="border-b-2 border-gray-200 ">
+        <div className="border-b-2  pt-5 pb-6 border-yonghancolor">
             {isLoginModal && <Login />}
-            <div className="flex justify-between mt-3 ml-4 p-2">
-                <div className="flex justify-between w-[1200px]">
+            <div className="flex justify-between  ml-4   gap-4">
+                <div className="flex justify-between w-10/12">
                     <span>YOUNG HAN</span>
-                    <div className="w-44 flex justify-between">
+                    <div className="w-48 flex justify-between">
                         <button type="button">오늘의 운세</button>
-                        <button type="button">최근 본 집</button>
+                        <button type="button">최근 본 집</button>{" "}
+                        <RxMagnifyingGlass size={25} />
                     </div>
                 </div>
-                <div className="flex justify-between mr-4 w-20">
+                <div className="flex mr-4 w-20 gap-3 ">
                     <button onClick={handleShowLogin} type="button">
                         로그인
                     </button>
-                    <RxMagnifyingGlass size={25} />
                 </div>
             </div>
         </div>
