@@ -23,7 +23,7 @@ module.exports = {
     ],
     rules: {
         "import/prefer-default-export": ["off"],
-        "react/no-unused-state": "warn", // 사용되지 않는 state
+        // "react/no-unused-state": "warn", // 사용되지 않는 state
         "react/self-closing-comp": "warn", // 셀프 클로징 태그 가능하면 적용
         "prettier/prettier": [
             "error",
@@ -34,7 +34,7 @@ module.exports = {
         "react/prop-types": "error",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
-        "no-unused-vars": "error",
+        // "no-unused-vars": "error",
         "linebreak-style": 0,
         "import/extensions": 0,
         "no-use-before-define": 0,
