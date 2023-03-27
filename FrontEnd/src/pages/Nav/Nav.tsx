@@ -1,87 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import NavLikeListModal from "./NavLikeListModal";
-import NavLoginModal from "./NavLoginModal";
-import NavRecentSeenModal from "./NavRecentSeenModal";
-import NavSearchModal from "./NavSearchModal";
+import { RxMagnifyingGlass } from "react-icons/rx";
+import Login from "./components/Login";
 
 function Nav() {
-    const [openLikeModal, setOpenLikeModal] = useState(false);
-    const [openLoginModal, setOpenLoginModal] = useState(false);
-    const [openRecentModal, setOpenRecentModal] = useState(false);
-    const [openSearchModal, setOpenSearchModal] = useState(false);
-    const onOpenLikeModal = () => {
-        setOpenLikeModal(!openLikeModal);
-    };
-    const onOpenLoginModal = () => {
-        setOpenLoginModal(!openLoginModal);
-    };
-    const onOpenRecentModal = () => {
-        setOpenRecentModal(!openRecentModal);
-    };
-    const onOpenSearchModal = () => {
-        setOpenSearchModal(!openSearchModal);
+    const [isLoginModal, setIsLoginModal] = useState(false);
+    const handleShowLogin = () => {
+        setIsLoginModal((prev) => !prev);
     };
     return (
-        <header className="flex justify-between border-b border-gray-300 p-2">
-            <Link
-                to="/"
-                className="flex items-center text-4xl text-brand gap-2"
-            >
-                <img
-                    alt="YONGHAN"
-                    src="images/YongHan.png"
-                    className="w-16 h-16"
-                />
-                <h1>용한</h1>
-            </Link>
-            <nav className="flex items-center gap-4 font-semibold">
-                {openSearchModal && (
-                    <NavSearchModal onOpenSearchModal={onOpenSearchModal} />
-                )}
-                <div
-                    className="cursor-pointer"
-                    onClick={() => {
-                        setOpenSearchModal(true);
-                    }}
-                >
-                    <span className="material-symbols-outlined">search</span>
+        <div className="border-b-2 border-gray-200 ">
+            {isLoginModal && <Login />}
+            <div className="flex justify-between mt-3 ml-4 p-2">
+                <div className="flex justify-between w-[1200px]">
+                    <span>YOUNG HAN</span>
+                    <div className="w-44 flex justify-between">
+                        <button type="button">오늘의 운세</button>
+                        <button type="button">최근 본 집</button>
+                    </div>
                 </div>
-                {openLikeModal && (
-                    <NavLikeListModal onOpenLikeModal={onOpenLikeModal} />
-                )}
-                <div
-                    className="cursor-pointer"
-                    onClick={() => {
-                        setOpenLikeModal(true);
-                    }}
-                >
-                    <span className="material-symbols-outlined">thumb_up</span>
+                <div className="flex justify-between mr-4 w-20">
+                    <button onClick={handleShowLogin} type="button">
+                        로그인
+                    </button>
+                    <RxMagnifyingGlass size={25} />
                 </div>
-                {openRecentModal && (
-                    <NavRecentSeenModal onOpenRecentModal={onOpenRecentModal} />
-                )}
-                <div
-                    onClick={() => {
-                        setOpenRecentModal(true);
-                    }}
-                    className="cursor-pointer"
-                >
-                    <span className="material-symbols-outlined">home</span>
-                </div>
-                {openLoginModal && (
-                    <NavLoginModal onOpenLoginModal={onOpenLoginModal} />
-                )}
-                <div
-                    onClick={() => {
-                        setOpenLoginModal(true);
-                    }}
-                    className="cursor-pointer"
-                >
-                    로그인
-                </div>
-            </nav>
-        </header>
+            </div>
+        </div>
     );
 }
 
