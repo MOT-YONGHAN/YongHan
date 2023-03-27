@@ -37,10 +37,6 @@ module.exports = {
                 endOfLine: "auto",
             },
         ],
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "import/prefer-default-export": "error",
-        "react/prop-types": "off",
         "react/jsx-props-no-spreading": "error",
         "react/prop-types": "error",
         "react-hooks/rules-of-hooks": "error",
@@ -55,7 +51,6 @@ module.exports = {
         "react/react-in-jsx-scope": 0,
         "import/no-extraneous-dependencies": 0, // 테스트 또는 개발환경을 구성하는 파일에서는 devDependency 사용을 허용
         "no-shadow": 0,
-        "react/prop-types": 0,
         "react/jsx-filename-extension": [
             2,
             { extensions: [".js", ".jsx", ".ts", ".tsx"] },
