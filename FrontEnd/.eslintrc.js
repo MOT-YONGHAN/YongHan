@@ -60,7 +60,7 @@ module.exports = {
         },
     },
 };
-// "no-var": "warn", // var 금지
+
 // "no-multiple-empty-lines": "warn", // 여러 줄 공백 금지
 // eqeqeq: "warn", // 일치 연산자 사용 필수
 // "dot-notation": "warn", // 가능하다면 dot notation 사용
