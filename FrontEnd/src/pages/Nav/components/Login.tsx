@@ -4,7 +4,7 @@ import logo from "../../../assets/images/logo.png";
 
 export default function Login() {
     return (
-        <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6 max-md:w-3/6  w-[350px] overflow-hidden">
+        <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
             <div className="mx-auto w-10/12">
                 <div className="flex justify-between  h-9">
                     <span>로그인</span>
@@ -34,32 +34,35 @@ export default function Login() {
                     </label>
                     <button type="button">비밀번호 찾기</button>
                 </div>
-            </div>
-            <div className="flex flex-col items-start justify-center mt-2">
-                <div className="flex items-center justify-center  w-full">
-                    {/* <img className="w-10 rounded-70%" alt="LOGO" src={logo} /> */}
-                    <button className="bg-yhBlue1 w-full h-10" type="button">
-                        회원가입
-                    </button>
-                </div>
+                <div className="flex flex-col items-start justify-center mt-2 gap-2 pb-2">
+                    <div className="flex items-center justify-center  w-full">
+                        {/* <img className="w-10 rounded-70%" alt="LOGO" src={logo} /> */}
+                        <button
+                            className="bg-yhBlue1 w-full h-10 hover:border-2 border-yonghancolor"
+                            type="button"
+                        >
+                            회원가입
+                        </button>
+                    </div>
 
-                <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10">
-                    <SiNaver />
-                    <button
-                        className="items-center justify-center"
-                        type="button"
-                    >
-                        네이버 로그인
-                    </button>
-                </div>
-                <div className="flex items-center justify-center gap-2 w-full bg-yhBlue3 h-10">
-                    <SiKakaotalk />
-                    <button
-                        className="items-center justify-center"
-                        type="button"
-                    >
-                        카카오 로그인
-                    </button>
+                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 border-yonghancolor">
+                        <SiNaver />
+                        <button
+                            className="items-center justify-center"
+                            type="button"
+                        >
+                            네이버 로그인
+                        </button>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue3 h-10 hover:border-2 border-yonghancolor">
+                        <SiKakaotalk />
+                        <button
+                            className="items-center justify-center"
+                            type="button"
+                        >
+                            카카오 로그인
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
