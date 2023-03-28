@@ -1,5 +1,11 @@
+import ProductInfo from "./components/ProductInfo";
+
 function Detail() {
-    return <div>Detail</div>;
+    return (
+        <div className="flex justify-center">
+            <ProductInfo />
+        </div>
+    );
 }
 
 export default Detail;
