@@ -30,7 +30,7 @@ function ProductInfo() {
                                     <h2 className=" w-[80px] text-slate-500">
                                         {data.title}
                                     </h2>
-                                    <p className="ml-[35px] "> 정보들 </p>
+                                    <p className="ml-[35px] "> 정보 </p>
                                 </li>
                             );
                         })}
