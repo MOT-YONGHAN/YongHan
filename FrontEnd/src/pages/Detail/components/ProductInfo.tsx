@@ -14,12 +14,12 @@ function ProductInfo() {
                 src={logoImg}
             />
             <div className="productInfo  w-[100%] pl-[50px] columns-auto">
-                <section className="productTitleWrapper flex mt-4 pb-4  pr-75px justify-between border-b border-solid border-black">
+                <section className="productTitleWrapper flex mt-4 pb-4 pr-75px justify-between border-b border-solid border-black">
                     <h1 className="productTitle text-3xl font-bold">
                         타로타로타타로 (Tarotarotarotataro)
                     </h1>
                     <div className="productShare">
-                        <CiShare2 className="w-[40px] h-[40px] hover:pointer" />
+                        <CiShare2 className="w-[30px] h-[30px] relative top-2 hover:cursor-pointer" />
                     </div>
                 </section>
                 <div className="flex border-b border-solid border-zinc-400 justify-between">
