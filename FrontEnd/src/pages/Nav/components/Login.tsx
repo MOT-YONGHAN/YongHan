@@ -1,6 +1,5 @@
 import { SiNaver, SiKakaotalk } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
-import logo from "../../../assets/images/logo.png";
 
 export default function Login() {
     return (
@@ -8,7 +7,7 @@ export default function Login() {
             <div className="mx-auto w-10/12">
                 <div className="flex justify-between  h-9">
                     <span>로그인</span>
-                    <VscClose size={20} />
+                    <VscClose className="hover:cursor-pointer" size={20} />
                 </div>
                 <div className="flex">
                     <form className="flex flex-col">
@@ -23,8 +22,8 @@ export default function Login() {
                             placeholder="비밀번호"
                         />
                     </form>
-                    <div className=" h-auto ml-2 flex content-center  items-center w-1/3 rounded-md text-white bg-yonghancolor">
-                        <p className="mx-auto">로그인</p>
+                    <div className=" h-auto ml-2 flex content-center hover:cursor-pointer items-center w-1/3 rounded-md text-white bg-yonghancolor">
+                        <p className="mx-auto ">로그인</p>
                     </div>
                 </div>
                 <div className="flex justify-between p-1 h-9">
@@ -34,9 +33,8 @@ export default function Login() {
                     </label>
                     <button type="button">비밀번호 찾기</button>
                 </div>
-                <div className="flex flex-col items-start justify-center mt-2 gap-2 pb-2">
+                <div className="flex flex-col items-start justify-center mt-2 gap-2 pb-6">
                     <div className="flex items-center justify-center  w-full">
-                        {/* <img className="w-10 rounded-70%" alt="LOGO" src={logo} /> */}
                         <button
                             className="bg-yhBlue1 w-full h-10 hover:border-2 border-yonghancolor"
                             type="button"
@@ -45,7 +43,7 @@ export default function Login() {
                         </button>
                     </div>
 
-                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 border-yonghancolor">
+                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor">
                         <SiNaver />
                         <button
                             className="items-center justify-center"
@@ -54,7 +52,7 @@ export default function Login() {
                             네이버 로그인
                         </button>
                     </div>
-                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue3 h-10 hover:border-2 border-yonghancolor">
+                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue3 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor">
                         <SiKakaotalk />
                         <button
                             className="items-center justify-center"
