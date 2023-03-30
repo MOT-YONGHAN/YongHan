@@ -24,7 +24,7 @@ function ProductMap() {
             <div className="mapTitle mt-[90px] mb-3 pb-5 border-b border-solid border-slate-300">
                 <h2 className="text-2xl font-bold">(점집 이름) 위치</h2>
             </div>
-            <div id="map" className="w-[100%] h-[660px] my-[30px]" />
+            <div id="map" className="w-[100%] h-[660px] my-[30px] " />
             <div className="flex justify-between pb-[30px] mb-[50px] border-b border-solid border-slate-300">
                 <span className="leading-loose tracking-wider text-lg">
                     주소: 어디입니다.
