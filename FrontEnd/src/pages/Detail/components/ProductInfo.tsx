@@ -3,7 +3,7 @@ import logoImg from "../../../assets/images/logo.png";
 
 function ProductInfo() {
     const stars = Array(5).fill(
-        <CiStar className="w-[40px] h-[40px] text-slate-500 " />,
+        <CiStar className="w-[30px] h-[30px] text-slate-500 " />,
     );
 
     return (
@@ -37,7 +37,9 @@ function ProductInfo() {
                     </section>
                     <section className="rateZone flex my-6 mr-3 ">
                         <div className="flex ">{stars}</div>
-                        <span className="ml-1 relative top-3.5 ">(34)</span>
+                        <span className="ml-1 relative top-2 text-[14px]">
+                            (34)
+                        </span>
                     </section>
                 </div>
                 <section className="priceZone my-6 flex">

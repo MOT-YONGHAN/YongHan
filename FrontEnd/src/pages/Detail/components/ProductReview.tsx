@@ -9,7 +9,7 @@ function ProductReview() {
     );
 
     return (
-        <>
+        <div className="border-b border-solid border-slate-200 pb-[40px]">
             <div className=" flex justify-between border-b border-solid border-black pb-3">
                 <h2 className="text-2xl font-bold">
                     (가게이름)후기
@@ -49,7 +49,7 @@ function ProductReview() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
