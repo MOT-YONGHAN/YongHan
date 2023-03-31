@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar";
 import logo from "../../assets/images/logo.png";
 import Lastest from "./components/Lastest";
 import Save from "./components/Save";
+import KakaoLogout from "./components/soicallogin/KakaoLogout";
 
 declare global {
     interface Window {
@@ -29,7 +30,7 @@ function Nav() {
     return (
         <div className=" pt-2  pb-2">
             {isLoginModal && <Login />}
-
+            <KakaoLogout />
             <div className="flex justify-between   h-20  gap-4">
                 <div className="flex justify-between  border-b-2  border-gray-200 w-full">
                     <div className="flex gap-10 pl-4  h-full">

@@ -1,7 +1,6 @@
 import { SiKakaotalk } from "react-icons/si";
 import { REST_API_KEY, REDIRECT_URI } from "./oauth";
 
-const { Kakao } = window;
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`;
 function KakaoLogin() {
     const handleLogin = () => {

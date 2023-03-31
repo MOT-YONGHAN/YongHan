@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { REST_API_KEY, REDIRECT_URI } from "./oauth";
 
@@ -6,6 +6,7 @@ export default function KakaoRedi() {
     const location = useLocation();
     const navigate = useNavigate();
     const KAKAO_CODE = location.search.split("=")[1];
+    const [token, setToken] = useState<string>("");
 
     useEffect(() => {
         const getKakaoToken = () => {
@@ -25,7 +26,9 @@ export default function KakaoRedi() {
                     );
                 })
                 .then((data) => {
-                    console.log(data.access_token);
+                    console.log(data);
+
+                    setToken(data.access_token);
                     if (data.access_token) {
                         fetch("http://172.30.113.154/auth/kakao-login", {
                             method: "POST",
@@ -52,5 +55,6 @@ export default function KakaoRedi() {
         if (!location.search) return;
         getKakaoToken();
     }, [KAKAO_CODE, location.search, navigate]);
+    console.log(token);
     return <div>KakaoLogin</div>;
 }
