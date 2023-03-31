@@ -1,5 +1,7 @@
-import { SiNaver, SiKakaotalk } from "react-icons/si";
+import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
+import { useEffect } from "react";
+import KakaoLogin from "./soicallogin/KakaoLogin";
 
 export default function Login() {
     return (
@@ -52,15 +54,7 @@ export default function Login() {
                             네이버 로그인
                         </button>
                     </div>
-                    <div className="flex items-center justify-center gap-2 w-full bg-yhBlue3 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor">
-                        <SiKakaotalk />
-                        <button
-                            className="items-center justify-center"
-                            type="button"
-                        >
-                            카카오 로그인
-                        </button>
-                    </div>
+                    <KakaoLogin />
                 </div>
             </div>
         </div>

@@ -5,6 +5,12 @@ import logo from "../../assets/images/logo.png";
 import Lastest from "./components/Lastest";
 import Save from "./components/Save";
 
+declare global {
+    interface Window {
+        Kakao: any;
+    }
+}
+
 function Nav() {
     const [isLoginModal, setIsLoginModal] = useState(false);
     const [showLastest, setLastest] = useState(false);
