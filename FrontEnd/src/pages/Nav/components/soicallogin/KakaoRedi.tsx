@@ -10,10 +10,11 @@ export default function KakaoRedi() {
 
     useEffect(() => {
         const getKakaoToken = () => {
-            fetch(`https://kauth.kakao.com/oauth/token`, {
+            fetch("https://kauth.kakao.com/oauth/token", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=utf-8",
                 },
                 body: `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_url=${REDIRECT_URI}&code=${KAKAO_CODE}`,
             })
@@ -28,7 +29,7 @@ export default function KakaoRedi() {
                 .then((data) => {
                     console.log(data);
 
-                    setToken(data.access_token);
+                    setToken(data);
                     if (data.access_token) {
                         fetch("http://172.30.113.154/auth/kakao-login", {
                             method: "POST",
