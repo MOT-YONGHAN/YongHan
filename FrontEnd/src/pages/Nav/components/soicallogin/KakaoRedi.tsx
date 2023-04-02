@@ -6,7 +6,7 @@ export default function KakaoRedi() {
     const location = useLocation();
     const navigate = useNavigate();
     const KAKAO_CODE = location.search.split("=")[1];
-    const [token, setToken] = useState<string>("");
+    const [token, setToken] = useState("");
 
     useEffect(() => {
         const getKakaoToken = () => {
@@ -16,7 +16,9 @@ export default function KakaoRedi() {
                     "Content-Type":
                         "application/x-www-form-urlencoded;charset=utf-8",
                 },
-                body: `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_url=${REDIRECT_URI}&code=${KAKAO_CODE}`,
+                body: `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${encodeURIComponent(
+                    REDIRECT_URI,
+                )}&code=${KAKAO_CODE}`,
             })
                 .then((response) => {
                     if (response.ok) {
@@ -28,13 +30,12 @@ export default function KakaoRedi() {
                 })
                 .then((data) => {
                     console.log(data);
-
-                    setToken(data);
+                    setToken(data.access_token);
                     if (data.access_token) {
                         fetch("http://172.30.113.154/auth/kakao-login", {
                             method: "POST",
                             headers: {
-                                Authorization: data.access_token,
+                                Authorization: `Bearer ${data.access_token}`,
                                 "Content-Type":
                                     "application/json;charset=utf-8",
                             },
@@ -56,6 +57,7 @@ export default function KakaoRedi() {
         if (!location.search) return;
         getKakaoToken();
     }, [KAKAO_CODE, location.search, navigate]);
+
     console.log(token);
     return <div>KakaoLogin</div>;
 }

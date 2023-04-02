@@ -1,28 +1,31 @@
+import { useEffect } from "react";
+
 const { Kakao } = window;
 
-let initialized = false;
-
-function initializeKakao() {
-    if (!initialized) {
-        Kakao.init("d2321e7b724091fc6a90ece3441d6dde");
-        initialized = true;
-    }
-}
-
 function KakaoLogout() {
-    const handleLogout = () => {
-        Kakao.Auth.logout(() => {
-            console.log("logout");
-        });
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+    const handleKakaoLogout = () => {
+        if (window.Kakao) {
+            // Kakao 객체가 로드되었는지 확인합니다.
+            window.Kakao.Auth.logout(() => {
+                console.log("User is logged out from Kakao.");
+            });
+        } else {
+            console.log("Kakao SDK not loaded yet.");
+        }
     };
-
-    if (!initialized) {
-        initializeKakao();
-    }
-
     return (
         <div>
-            <button type="button" onClick={handleLogout}>
+            <button type="button" onClick={handleKakaoLogout}>
                 로그아웃
             </button>
         </div>

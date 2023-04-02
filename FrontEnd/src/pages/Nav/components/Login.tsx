@@ -1,7 +1,6 @@
 import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
-import { useEffect } from "react";
-import KakaoLogin from "./soicallogin/KakaoLogin";
+import KakaoButton from "./soicallogin/KakaoButton";
 
 export default function Login() {
     return (
@@ -54,7 +53,7 @@ export default function Login() {
                             네이버 로그인
                         </button>
                     </div>
-                    <KakaoLogin />
+                    <KakaoButton />
                 </div>
             </div>
         </div>
