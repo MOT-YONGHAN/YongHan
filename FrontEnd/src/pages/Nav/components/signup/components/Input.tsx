@@ -4,7 +4,7 @@ import { formAction, RootState } from "../../../../../modules/form";
 function Input() {
     const dispatch = useDispatch();
     const form = useSelector((state: RootState) => state);
-    console.log(form.email);
+    console.log(form);
     const nicknameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(formAction.nicknameHandler(event.target.value));
     };
@@ -25,14 +25,11 @@ function Input() {
         fetch("http://10/", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json;charset=utf-8",
             },
             body: JSON.stringify(form),
         })
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-            })
             .catch((error) => {
                 console.log(error); // Handle error
             });
@@ -80,9 +77,9 @@ function Input() {
 
             <label className="flex flex-col gap-1" htmlFor="password">
                 Password
-                {/* {form.password && form.password.length < 8 && (
+                {form.password && form.password.length < 8 && (
                     <span>8자리이상 입력하세요! </span>
-                )} */}
+                )}
                 <div className="flex flex-col gap-5">
                     <input
                         name="password"
@@ -91,10 +88,10 @@ function Input() {
                         type="password"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    {/* {form.vaildPassword &&
+                    {form.vaildPassword &&
                         !(form.password === form.vaildPassword) && (
                             <span>비밀번호가 다릅니다!</span>
-                        )} */}
+                        )}
                     <input
                         name="vaildPassword"
                         onChange={isValidpassword}
