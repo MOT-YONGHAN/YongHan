@@ -46,7 +46,7 @@ module.exports = {
             2,
             { extensions: [".js", ".jsx", ".ts", ".tsx"] },
         ],
-        "jsx-a11y/no-noninteractive-element-interactions": 0,
+        // "jsx-a11y/no-noninteractive-element-interactions": 0,
         "@typescript-eslint/explicit-module-boundary-types": 0,
     },
     settings: {

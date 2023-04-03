@@ -10,7 +10,7 @@ function Signup() {
         <div>
             <form className="flex items-center justify-center flex-col gap-7">
                 <Input />
-                <button onClick={handlePageChange} type="submit">
+                <button onClick={handlePageChange} disabled type="submit">
                     완료
                 </button>
             </form>

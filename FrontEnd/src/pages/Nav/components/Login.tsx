@@ -1,8 +1,13 @@
 import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
 import KakaoButton from "./soicallogin/KakaoButton";
 
 export default function Login() {
+    const navigate = useNavigate();
+    const hadleSignup = () => {
+        navigate("/signup");
+    };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
             <div className="mx-auto w-10/12">
@@ -35,7 +40,12 @@ export default function Login() {
                     <button type="button">비밀번호 찾기</button>
                 </div>
                 <div className="flex flex-col items-start justify-center mt-2 gap-2 pb-6">
-                    <div className="flex items-center justify-center  w-full">
+                    <div
+                        role="button"
+                        tabIndex={0}
+                        onMouseDown={hadleSignup}
+                        className="flex items-center justify-center  w-full"
+                    >
                         <button
                             className="bg-yhBlue1 w-full h-10 hover:border-2 border-yonghancolor"
                             type="button"
