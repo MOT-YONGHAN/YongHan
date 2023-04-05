@@ -3,7 +3,7 @@ import { formAction, RootState } from "../../../../../modules/form";
 
 function Input() {
     const dispatch = useDispatch();
-    const form = useSelector((state: RootState) => state);
+    const form = useSelector((state: RootState) => state.formReducer);
     console.log(form);
     const nicknameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(formAction.nicknameHandler(event.target.value));

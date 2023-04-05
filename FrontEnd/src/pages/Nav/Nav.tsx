@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Login from "./components/Login";
 import SearchBar from "./components/SearchBar";
 import logo from "../../assets/images/logo.png";
 import Lastest from "./components/Lastest";
 import Save from "./components/Save";
 import KakaoLogout from "./components/soicallogin/KakaoLogout";
+import { toggleModal, loginRootState } from "../../modules/LoginModal";
 
 declare global {
     interface Window {
@@ -16,8 +18,14 @@ function Nav() {
     const [isLoginModal, setIsLoginModal] = useState(false);
     const [showLastest, setLastest] = useState(false);
     const [showSave, setShowSave] = useState(false);
+
+    const formHandler: boolean = useSelector(
+        (state: loginRootState) => state.modalReducer.ismodal,
+    );
+    const dispatch = useDispatch();
     const handleShowLogin = () => {
         setIsLoginModal((prev) => !prev);
+        if (formHandler === false) dispatch(toggleModal());
     };
     const hadleShowLastest = () => {
         setLastest((prev) => !prev);
