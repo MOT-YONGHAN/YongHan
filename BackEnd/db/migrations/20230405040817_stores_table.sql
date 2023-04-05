@@ -1,0 +1,15 @@
+-- migrate:up
+CREATE TABLE stores (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  category_id INT NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  thumbnail VARCHAR(255) NULL,
+  price decimal(10,3) NULL,
+  address VARCHAR(1000) NOT NULL,
+  description VARCHAR(1000) NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  );
+
+-- migrate:down
+DROP TABLE stores;
