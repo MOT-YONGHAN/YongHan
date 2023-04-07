@@ -1,28 +1,55 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Login from "./components/Login";
 import SearchBar from "./components/SearchBar";
 import logo from "../../assets/images/logo.png";
 import Lastest from "./components/Lastest";
 import Save from "./components/Save";
+import KakaoLogout from "./components/soicallogin/KakaoLogout";
+import {
+    toggleModal,
+    lastestModal,
+    loginRootState,
+    likeModal,
+    login,
+} from "../../modules/LoginModal";
+
+declare global {
+    interface Window {
+        Kakao: any;
+    }
+}
 
 function Nav() {
-    const [isLoginModal, setIsLoginModal] = useState(false);
-    const [showLastest, setLastest] = useState(false);
-    const [showSave, setShowSave] = useState(false);
+    const formHandler: boolean = useSelector(
+        (state: loginRootState) => state.modalReducer.ismodal,
+    );
+    const dispatch = useDispatch();
+    const modalhandler: boolean = useSelector(
+        (state: loginRootState) => state.modalReducer.lastestmodal,
+    );
+    const likeHandler: boolean = useSelector(
+        (state: loginRootState) => state.modalReducer.likemodal,
+    );
+    const loginhandler: boolean = useSelector(
+        (state: loginRootState) => state.modalReducer.login,
+    );
     const handleShowLogin = () => {
-        setIsLoginModal((prev) => !prev);
+        dispatch(login());
+        if (formHandler === false) dispatch(toggleModal());
     };
     const hadleShowLastest = () => {
-        setLastest((prev) => !prev);
+        dispatch(lastestModal());
     };
 
     const handleShowSave = () => {
-        setShowSave((prev) => !prev);
+        if (likeHandler) dispatch(likeModal());
+        dispatch(likeModal());
     };
 
     return (
         <div className=" pt-2  pb-2">
-            {isLoginModal && <Login />}
+            {loginhandler && <Login />}
 
             <div className="flex justify-between   h-20  gap-4">
                 <div className="flex justify-between  border-b-2  border-gray-200 w-full">
@@ -61,7 +88,7 @@ function Nav() {
                             >
                                 찜
                             </button>
-                            {showSave && <Save />}
+                            {likeHandler && <Save />}
                         </div>
                         <div>
                             <button
@@ -71,7 +98,7 @@ function Nav() {
                             >
                                 최근 본 집
                             </button>
-                            {showLastest && <Lastest />}
+                            {modalhandler && <Lastest />}
                         </div>
                     </div>
                     <div className="flex mr-4 w-20 gap-3  ">
