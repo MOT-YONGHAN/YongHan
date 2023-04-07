@@ -1,35 +1,50 @@
 const userService = require("../services/userService");
-const { catchAsync } = require("../utils/catchAsync");
-const detectError = require("../utils/detectError");
+const { catchAsync } = require("../utils/error");
+const detectError = require("../utils/error");
 
+// local - 회원가입
 const signup = catchAsync(async (req, res) => {
-  const { name, nickname, email, password, socialId } = req.body;
+  const { name, nickname, email, password, socialTypeId } = req.body;
 
-  if (!name || !nickname || !email || !password || !socialId)
-    detectError("KEY_ERROR", 400);
+  if (!name || !nickname || !email || !password || !socialTypeId) {
+    const error = new Error("KEY_ERROR");
+    error.statusCode = 400;
 
-  await userService.signup(name, nickname, email, password, socialId);
+    throw error;
+  }
+  await userService.signup(name, nickname, email, password, socialTypeId);
 
   return res.status(201).json({ message: "USER_CREATED!" });
 });
 
+// local - 로그인
 const signin = catchAsync(async (req, res) => {
-  const { email, password, socialId } = req.body;
+  const { email, password, socialTypeId } = req.body;
 
-  if (!email || !password || !socialId) detectError("KEY_ERROR", 400);
+  if (!email || !password || !socialTypeId) {
+    const error = new Error("KEY_ERROR");
+    error.statusCode = 400;
 
-  jwtToken = await userService.signin(email, password, socialId);
+    throw error;
+  }
+
+  jwtToken = await userService.signin(email, password, socialTypeId);
 
   return res.status(200).json({ accessToken: jwtToken });
 });
 
+// 카카오 로그인
 const kakaoLogin = catchAsync(async (req, res) => {
   const kakaoToken = req.headers.authorization;
-  const { socialId } = req.body;
 
-  if (!kakaoToken || !socialId) detectError("KEY_ERROR", 401);
+  if (!kakaoToken || !socialTypeId) {
+    const error = new Error("KEY_ERROR");
+    error.statusCode = 400;
 
-  const accessToken = await userService.kakaoLogin(kakaoToken, socialId);
+    throw error;
+  }
+
+  const accessToken = await userService.kakaoLogin(kakaoToken, socialTypeId);
 
   return res.status(200).json({ accessToken: accessToken });
 });

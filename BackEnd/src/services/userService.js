@@ -1,8 +1,8 @@
 const userDao = require("../models/userDao");
 const bcrypt = require("bcrypt");
-const jwt = require("jswonwebtoken");
+const jwt = require("jsonwebtoken");
 const axios = require("axios");
-const detectError = require("../utils/detectError");
+const detectError = require("../utils/error");
 
 const SocialTypeId = Object.freeze({
   LOCAL: 1,
@@ -16,12 +16,17 @@ const signup = async (name, nickname, email, password, socialTypeId) => {
     "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})"
   );
 
-  if (!pwValidation.test(password)) detectError("PASSWORd_IS_NOT_VALID", 409);
+  if (!pwValidation.test(password)) {
+    const error = new Error("KEY_ERROR");
+    error.statusCode = 400;
+
+    throw error;
+  }
 
   const saltRounds = 12;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  const createUser = await userDao.createUser(
+  const createUser = await userDao.localCreateUser(
     name,
     nickname,
     email,
@@ -36,9 +41,14 @@ const signin = async (email, password) => {
   const hashedPassword = await userDao.getHashedPassword(email);
   const compare = await bcrypt.hash(password, hashedPassword);
 
-  if (!compare) detectError("PASSWORD_DOES_NOT_MATCH", 401);
+  if (!compare) {
+    const error = new Error("KEY_ERROR");
+    error.statusCode = 400;
 
-  const userData = await userDao.checkUserById(email);
+    throw error;
+  }
+
+  const userData = await userDao.getUserId(email);
 
   const payLoad = { userData: userData.userId };
   const jwtToken = jwt.sign(payLoad, process.env.JWT_SECRET);
@@ -46,7 +56,7 @@ const signin = async (email, password) => {
   return jwtToken;
 };
 
-const kakaoLogin = async (kakaoToken, socialId) => {
+const kakaoLogin = async (kakaoToken) => {
   const result = await axios.get("https://kapi.kakao.com/v2/user/me", {
     headers: {
       Authorization: `Bearer ${kakaoToken}`,
@@ -55,7 +65,10 @@ const kakaoLogin = async (kakaoToken, socialId) => {
   });
 
   if (!result) {
-    detectError("TOKEN_ERROR", 400);
+    const error = new Error("KEY_ERROR");
+    error.statusCode = 400;
+
+    throw error;
   }
 
   const { data } = result;
@@ -73,7 +86,7 @@ const kakaoLogin = async (kakaoToken, socialId) => {
       name,
       nickname,
       email,
-      SocialTypeId
+      socialTypeId
     );
 
     return (accessToken = jwt.sign(
