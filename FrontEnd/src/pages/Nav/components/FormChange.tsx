@@ -2,19 +2,23 @@ import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import KakaoButton from "./soicallogin/KakaoButton";
-import { loginRootState, toggleModal } from "../../../modules/LoginModal";
+import {
+    loginRootState,
+    toggleModal,
+    login,
+} from "../../../modules/LoginModal";
 
 function FormChange() {
     const dispatch = useDispatch();
     const formhandler: boolean = useSelector(
         (state: loginRootState) => state.modalReducer.ismodal,
     );
-    console.log(formhandler);
+
     const handleSigup = () => {
-        dispatch(toggleModal());
+        return formhandler && dispatch(toggleModal());
     };
     // const closeModal = () => {
-    //     dispatch(toggleModal());
+    //     loginModal();
     // };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
