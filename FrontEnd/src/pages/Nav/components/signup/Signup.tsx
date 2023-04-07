@@ -7,7 +7,7 @@ function Signup() {
         navigate("/");
     };
     return (
-        <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
+        <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  py-6  max-md:w-3/6  w-[350px] overflow-hidden">
             <form className="flex items-center justify-center flex-col gap-7">
                 <Input />
                 <button onClick={handlePageChange} disabled type="submit">
