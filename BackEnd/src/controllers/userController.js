@@ -39,18 +39,30 @@ const kakaoLogin = catchAsync(async (req, res) => {
   // const { socialTypeId } = req.body;
 
   if (!kakaoToken) {
-    const error = new Error("NEED_KAKAO_TOKEN_AND_socailTypeId");
+    const error = new Error("NEED_KAKAO_TOKEN");
     error.statusCode = 400;
 
     throw error;
   }
 
-  const accessToken = await userService.kakaoLogin(kakaoToken);
+  const kakao_accessToken = await userService.kakaoLogin(kakaoToken);
 
-  return res.status(200).json({ accessToken: accessToken });
+  return res.status(200).json({ accessToken: kakao_accessToken });
 });
 
-// const naverLogin = catchAsync(async (req, res) => {});
+const naverLogin = catchAsync(async (req, res) => {
+  const naverToken = req.headers.authorization;
+
+  if (!naverToken) {
+    const error = new Error("NEED_NEVER_TOKEN_AND");
+    error.statusCode = 400;
+
+    throw error;
+  }
+  const naver_accessToken = await userService.naverLogin(naverToken);
+
+  return res.status(200).json({ accessToken: naver_accessToken });
+});
 
 // const userInfo = catchAsync(async (req, res) => {});
 
@@ -58,4 +70,5 @@ module.exports = {
   signup,
   signin,
   kakaoLogin,
+  naverLogin,
 };

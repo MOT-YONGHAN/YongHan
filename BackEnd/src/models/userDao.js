@@ -1,11 +1,5 @@
 const { appDataSource } = require("./appDataSource");
 
-const SocialTypeId = Object.freeze({
-  LOCAL: 1,
-  KAKAO: 2,
-  NAVER: 3,
-});
-
 // local - user인지 확인
 const getUserId = async (email) => {
   return await appDataSource.query(
@@ -65,7 +59,7 @@ const localCreateUser = async (
   );
 };
 
-const checkUserById = async (k_socialId) => {
+const checkUserById = async (socialId) => {
   const [userInfo] = await appDataSource.query(
     `
     SELECT
@@ -75,12 +69,12 @@ const checkUserById = async (k_socialId) => {
     WHERE
       social_id = ?
     `,
-    [k_socialId]
+    [socialId]
   );
   return userInfo;
 };
 
-const createUser = async (socialId, k_name, k_nickname, k_email) => {
+const createUser = async (socialId, name, nickname, email, socialTypeId) => {
   return await appDataSource.query(
     `
     INSERT INTO users (
@@ -94,9 +88,9 @@ const createUser = async (socialId, k_name, k_nickname, k_email) => {
       ?,
       ?,
       ?,
-      ${SocialTypeId.KAKAO}
+      ?
     )`,
-    [socialId, k_name, k_nickname, k_email]
+    [socialId, name, nickname, email, socialTypeId]
   );
 };
 
