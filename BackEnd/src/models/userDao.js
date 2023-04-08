@@ -80,23 +80,30 @@ const checkUserById = async (sociaId, socialTypeId) => {
   return userInfo;
 };
 
-const createUser = async (name, nickname, email, hashedPassword, socialId) => {
+const createUser = async (
+  socialId,
+  k_name,
+  k_nickname,
+  k_email,
+  socialTypeId
+) => {
+  console.log("dao", k_name, k_nickname, k_email);
   return await appDataSource.query(
     `
     INSERT INTO users (
+      social_id,
       name,
       nickname,
       email,
-      password,
-      socialId
+      social_type_id
     ) VALUES (
       ?,
       ?,
       ?,
       ?,
-      1
+      2
     )`,
-    [name, nickname, email, hashedPassword, socialId]
+    [socialId, k_name, k_nickname, k_email, socialTypeId]
   );
 };
 

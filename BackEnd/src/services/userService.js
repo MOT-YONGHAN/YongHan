@@ -17,8 +17,8 @@ const signup = async (name, nickname, email, password, socialTypeId) => {
   );
 
   if (!pwValidation.test(password)) {
-    const error = new Error("KEY_ERROR");
-    error.statusCode = 400;
+    const error = new Error("PASSWORD_IS_NOT_VALID");
+    error.statusCode = 409;
 
     throw error;
   }
@@ -42,7 +42,7 @@ const signin = async (email, password) => {
   const compare = await bcrypt.hash(password, hashedPassword);
 
   if (!compare) {
-    const error = new Error("KEY_ERROR");
+    const error = new Error("PASSWORD_DOES_NOT_MATCH");
     error.statusCode = 400;
 
     throw error;
@@ -56,7 +56,7 @@ const signin = async (email, password) => {
   return jwtToken;
 };
 
-const kakaoLogin = async (kakaoToken) => {
+const kakaoLogin = async (kakaoToken, socialTypeId) => {
   const result = await axios.get("https://kapi.kakao.com/v2/user/me", {
     headers: {
       Authorization: `Bearer ${kakaoToken}`,
@@ -65,27 +65,30 @@ const kakaoLogin = async (kakaoToken) => {
   });
 
   if (!result) {
-    const error = new Error("KEY_ERROR");
+    const error = new Error("TOKEN_ERROR");
     error.statusCode = 400;
 
     throw error;
   }
 
   const { data } = result;
+  console.log("service_token", result);
+
   const socialId = data.id;
-  const name = data.properties.name;
-  const nickname = data.properties.nickname;
-  const email = data.properties.email;
-  const socialTypeId = SocialTypeId.KAKAO;
+  const k_name = data.properties.name;
+  const k_nickname = data.properties.nickname;
+  const k_email = data.kakao_account.email;
+  console.log("service_nickname", k_nickname, k_email);
+  // const SocialTypeId = socialTypeId;
 
   const userId = await userDao.checkUserById(socialId, socialTypeId);
 
   if (!userId) {
     const newUser = await userDao.createUser(
       socialId,
-      name,
-      nickname,
-      email,
+      k_name,
+      k_nickname,
+      k_email,
       socialTypeId
     );
 

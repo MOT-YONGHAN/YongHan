@@ -36,9 +36,10 @@ const signin = catchAsync(async (req, res) => {
 // 카카오 로그인
 const kakaoLogin = catchAsync(async (req, res) => {
   const kakaoToken = req.headers.authorization;
+  const { socialTypeId } = req.body;
 
   if (!kakaoToken || !socialTypeId) {
-    const error = new Error("KEY_ERROR");
+    const error = new Error("NEED_KAKAO_TOKEN_AND_TYPEID");
     error.statusCode = 400;
 
     throw error;
