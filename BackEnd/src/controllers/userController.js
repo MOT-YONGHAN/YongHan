@@ -36,16 +36,16 @@ const signin = catchAsync(async (req, res) => {
 // 카카오 로그인
 const kakaoLogin = catchAsync(async (req, res) => {
   const kakaoToken = req.headers.authorization;
-  const { socialTypeId } = req.body;
+  // const { socialTypeId } = req.body;
 
-  if (!kakaoToken || !socialTypeId) {
-    const error = new Error("NEED_KAKAO_TOKEN_AND_TYPEID");
+  if (!kakaoToken) {
+    const error = new Error("NEED_KAKAO_TOKEN_AND_socailTypeId");
     error.statusCode = 400;
 
     throw error;
   }
 
-  const accessToken = await userService.kakaoLogin(kakaoToken, socialTypeId);
+  const accessToken = await userService.kakaoLogin(kakaoToken);
 
   return res.status(200).json({ accessToken: accessToken });
 });

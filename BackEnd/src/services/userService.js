@@ -56,7 +56,7 @@ const signin = async (email, password) => {
   return jwtToken;
 };
 
-const kakaoLogin = async (kakaoToken, socialTypeId) => {
+const kakaoLogin = async (kakaoToken) => {
   const result = await axios.get("https://kapi.kakao.com/v2/user/me", {
     headers: {
       Authorization: `Bearer ${kakaoToken}`,
@@ -65,30 +65,26 @@ const kakaoLogin = async (kakaoToken, socialTypeId) => {
   });
 
   if (!result) {
-    const error = new Error("TOKEN_ERROR");
+    const error = new Error("KAKAO_TOKEN_ERROR");
     error.statusCode = 400;
 
     throw error;
   }
 
   const { data } = result;
-  console.log("service_token", result);
-
   const k_socialId = data.id;
   const k_name = data.properties.name;
   const k_nickname = data.properties.nickname;
   const k_email = data.kakao_account.email;
-  console.log("service_nickname", k_nickname, k_email);
 
-  const userId = await userDao.checkUserById(k_socialId, socialTypeId);
+  const userId = await userDao.checkUserById(k_socialId);
 
   if (!userId) {
     const newUser = await userDao.createUser(
       k_socialId,
       k_name,
       k_nickname,
-      k_email,
-      socialTypeId
+      k_email
     );
 
     return (accessToken = jwt.sign(
