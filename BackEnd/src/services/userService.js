@@ -112,7 +112,7 @@ const naverLogin = async (naverToken) => {
 
     throw error;
   }
-  console.log("service", result);
+
   const { data } = result;
   const socialId = data.response.id;
   const name = data.response.name;
