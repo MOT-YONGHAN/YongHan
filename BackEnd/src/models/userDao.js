@@ -65,7 +65,7 @@ const localCreateUser = async (
   );
 };
 
-const checkUserById = async (sociaId, socialTypeId) => {
+const checkUserById = async (k_socialId, socialTypeId) => {
   const [userInfo] = await appDataSource.query(
     `
     SELECT
@@ -75,7 +75,7 @@ const checkUserById = async (sociaId, socialTypeId) => {
     WHERE
       social_id = ? AND social_type_id = ?
     `,
-    [sociaId, socialTypeId]
+    [k_socialId, socialTypeId]
   );
   return userInfo;
 };
@@ -87,7 +87,6 @@ const createUser = async (
   k_email,
   socialTypeId
 ) => {
-  console.log("dao", k_name, k_nickname, k_email);
   return await appDataSource.query(
     `
     INSERT INTO users (

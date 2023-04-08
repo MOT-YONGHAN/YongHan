@@ -74,18 +74,17 @@ const kakaoLogin = async (kakaoToken, socialTypeId) => {
   const { data } = result;
   console.log("service_token", result);
 
-  const socialId = data.id;
+  const k_socialId = data.id;
   const k_name = data.properties.name;
   const k_nickname = data.properties.nickname;
   const k_email = data.kakao_account.email;
   console.log("service_nickname", k_nickname, k_email);
-  // const SocialTypeId = socialTypeId;
 
-  const userId = await userDao.checkUserById(socialId, socialTypeId);
+  const userId = await userDao.checkUserById(k_socialId, socialTypeId);
 
   if (!userId) {
     const newUser = await userDao.createUser(
-      socialId,
+      k_socialId,
       k_name,
       k_nickname,
       k_email,
