@@ -21,7 +21,7 @@ function Input() {
         dispatch(formAction.vaildpasswordsHandler(event.target.value));
     };
 
-    const sendingForm = () => {
+    const sendingFormHandler = () => {
         fetch("http://10/", {
             method: "POST",
             headers: {

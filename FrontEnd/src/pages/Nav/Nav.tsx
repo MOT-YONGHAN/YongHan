@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./components/Login";
 import SearchBar from "./components/SearchBar";
@@ -6,6 +5,7 @@ import logo from "../../assets/images/logo.png";
 import Lastest from "./components/Lastest";
 import Save from "./components/Save";
 import KakaoLogout from "./components/soicallogin/KakaoLogout";
+
 import {
     toggleModal,
     lastestModal,
