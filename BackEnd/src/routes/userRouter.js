@@ -7,7 +7,7 @@ const userController = require("../controllers/usercontroller");
 router.post("/signup", userController.signup);
 router.post("/signin", userController.signin);
 router.post("/kakao", userController.kakaoLogin);
-router.post("/naver", userController.naverLogin);
+// router.post("/naver", userController.naverLogin);
 // router.get("/userInfo", validateToken, userController.userInfo);
 
 module.exports = {

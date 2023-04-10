@@ -51,54 +51,22 @@ const kakaoLogin = catchAsync(async (req, res) => {
 });
 
 // 네이버 로그인
-const naverLogin = catchAsync(async (req, res) => {
-  const naverToken = req.headers.authorization;
-  console.log("controller", naverToken);
-  if (!naverToken) {
-    const error = new Error("NEED_NEVER_TOKEN_AND");
-    error.statusCode = 400;
-
-    throw error;
-  }
-  const naver_accessToken = await userService.naverLogin(naverToken);
-
-  return res.status(200).json({ accessToken: naver_accessToken });
-});
-
-// 실험중
 // const naverLogin = catchAsync(async (req, res) => {
-//   const code = req.query.code;
-//   const state = req.query.state;
+//   const naverToken = req.headers.authorization;
 
-//   if (!code || !state) {
-//     const error = new Error("NEED_CODE_AND_STATE");
+//   if (!naverToken) {
+//     const error = new Error("NEED_NEVER_TOKEN_AND");
 //     error.statusCode = 400;
 
 //     throw error;
 //   }
-
-//   const naver_accessToken = await userService.naverLogin(code, state);
+//   const naver_accessToken = await userService.naverLogin(naverToken);
 
 //   return res.status(200).json({ accessToken: naver_accessToken });
-
-//   // const naverToken = req.headers.authorization;
-
-//   // if (!naverToken) {
-//   //   const error = new Error("NEED_NEVER_TOKEN_AND");
-//   //   error.statusCode = 400;
-
-//   //   throw error;
-//   // }
-//   // const naver_accessToken = await userService.naverLogin(naverToken);
-
-//   // return res.status(200).json({ accessToken: naver_accessToken });
 // });
-
-// const userInfo = catchAsync(async (req, res) => {});
 
 module.exports = {
   signup,
   signin,
   kakaoLogin,
-  naverLogin,
 };
