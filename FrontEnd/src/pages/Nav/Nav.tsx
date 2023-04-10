@@ -21,6 +21,23 @@ declare global {
 }
 
 function Nav() {
+    const test = () => {
+        fetch("http://172.30.46.227:3000/auth/kakao", {
+            method: "POST",
+            // headers: {
+            //     "Content-Type":
+            //         "application/x-www-form-urlencoded;charset=utf-8",
+            // },
+            body: JSON.stringify({
+                data: "love",
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) =>
+                localStorage.setItem("accessToken", data.accessToken),
+            );
+    };
+
     const formHandler: boolean = useSelector(
         (state: loginRootState) => state.modalReducer.ismodal,
     );
@@ -104,7 +121,7 @@ function Nav() {
                     <div className="flex mr-4 w-20 gap-3  ">
                         <button
                             className="h-full p-1 hover:border-b-2 border-yonghancolor"
-                            onClick={handleShowLogin}
+                            onClick={test}
                             type="button"
                         >
                             로그인
