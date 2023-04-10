@@ -6,6 +6,7 @@ export default function KakaoRedi() {
     const location = useLocation();
     const navigate = useNavigate();
     const KAKAO_CODE = location.search.split("=")[1];
+    console.log(KAKAO_CODE);
     const [token, setToken] = useState("");
 
     useEffect(() => {
@@ -31,13 +32,14 @@ export default function KakaoRedi() {
                 .then((data) => {
                     console.log(data);
                     setToken(data.access_token);
+                    console.log(token);
                     if (data.access_token) {
-                        fetch("http://172.30.113.154/auth/kakao-login", {
+                        fetch("http://172.30.46.227:3000/auth/kakao", {
                             method: "POST",
                             headers: {
                                 Authorization: `Bearer ${data.access_token}`,
                                 "Content-Type":
-                                    "application/json;charset=utf-8",
+                                    "application/x-www-form-urlencoded;charset=utf-8",
                             },
                         })
                             .then((res) => res.json())
@@ -56,8 +58,10 @@ export default function KakaoRedi() {
         };
         if (!location.search) return;
         getKakaoToken();
-    }, [KAKAO_CODE, location.search, navigate]);
-
+    }, [KAKAO_CODE, location.search, navigate, token]);
+    useEffect(() => {
+        console.log(token);
+    }, [token]);
     console.log(token);
     return <div>KakaoLogin</div>;
 }
