@@ -34,7 +34,7 @@ export default function KakaoRedi() {
                     setToken(data.access_token);
                     console.log(token);
                     if (data.access_token) {
-                        fetch("https://172.30.46.177/auth/kakao", {
+                        fetch("http://172.30.46.227:3000/auth/kakao", {
                             method: "POST",
                             headers: {
                                 Authorization: `Bearer ${data.access_token}`,
