@@ -1,9 +1,9 @@
-const detectError = (message, status) => {
-  const error = new Error(message);
-  error.statusCode = status;
+// const detectError = (message, status) => {
+//   const error = new Error(message);
+//   error.statusCode = status;
 
-  throw error;
-};
+//   throw error;
+// };
 
 const catchAsync = (func) => {
   return (req, res, next) => {
@@ -20,7 +20,6 @@ const globalErrorHandler = (err, req, res, next) => {
 };
 
 module.exports = {
-  detectError,
   catchAsync,
-  globalErrorHandler
+  globalErrorHandler,
 };
