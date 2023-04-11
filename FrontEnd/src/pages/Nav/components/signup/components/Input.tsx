@@ -17,9 +17,9 @@ function Input() {
     const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(formAction.passwordHandler(event.target.value));
     };
-    const isValidpassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(formAction.vaildpasswordsHandler(event.target.value));
-    };
+    // const isValidpassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     dispatch(formAction.vaildpasswordsHandler(event.target.value));
+    // };
 
     const sendingFormHandler = () => {
         fetch("http://10/", {
@@ -96,7 +96,7 @@ function Input() {
                         )}
                     <input
                         name="vaildPassword"
-                        onChange={isValidpassword}
+                        // onChange={isValidpassword}
                         className="border-b-2 focus:outline-none focus:border-b-3  focus:border-black"
                         type="password"
                         placeholder="비밀번호를 재입력하세요"

@@ -5,8 +5,7 @@ const initialState = {
     name: "",
     email: "",
     password: "",
-    vaildPassword: "",
-    type: "1",
+    socialTypeId: "LOCAL",
 };
 
 const formSlicer = createSlice({
@@ -37,12 +36,12 @@ const formSlicer = createSlice({
                 password: action.payload,
             };
         },
-        vaildpasswordsHandler: (state, action) => {
-            return {
-                ...state,
-                vaildPassword: action.payload,
-            };
-        },
+        // vaildpasswordsHandler: (state, action) => {
+        //     return {
+        //         ...state,
+        //         vaildPassword: action.payload,
+        //     };
+        // },
     },
 });
 

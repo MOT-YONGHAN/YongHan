@@ -37,7 +37,7 @@ export default function KakaoRedi() {
                         fetch("http://172.30.46.227:3000/auth/kakao", {
                             method: "POST",
                             headers: {
-                                Authorization: `Bearer ${data.access_token}`,
+                                Authorization: data.access_token,
                                 "Content-Type":
                                     "application/x-www-form-urlencoded;charset=utf-8",
                             },
