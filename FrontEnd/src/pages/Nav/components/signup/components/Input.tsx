@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formAction, RootState } from "../../../../../modules/form";
 
 function Input() {
     const dispatch = useDispatch();
     const form = useSelector((state: RootState) => state.formReducer);
-
+    const [isvaild, setIsvaild] = useState("");
     const nicknameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(formAction.nicknameHandler(event.target.value));
     };
@@ -17,9 +18,9 @@ function Input() {
     const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(formAction.passwordHandler(event.target.value));
     };
-    // const isValidpassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     dispatch(formAction.vaildpasswordsHandler(event.target.value));
-    // };
+    const isValidpassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsvaild(event.target.value);
+    };
 
     const sendingFormHandler = () => {
         fetch("http://10/", {
@@ -88,15 +89,12 @@ function Input() {
                         type="password"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    {form.vaildPassword &&
-                        !(form.password === form.vaildPassword) && (
-                            <span className="isvaild">
-                                비밀번호가 다릅니다!
-                            </span>
-                        )}
+                    {form.vaildPassword && !(form.password === isvaild) && (
+                        <span className="isvaild">비밀번호가 다릅니다!</span>
+                    )}
                     <input
                         name="vaildPassword"
-                        // onChange={isValidpassword}
+                        onChange={isValidpassword}
                         className="border-b-2 focus:outline-none focus:border-b-3  focus:border-black"
                         type="password"
                         placeholder="비밀번호를 재입력하세요"
