@@ -37,7 +37,7 @@ function FormChange() {
                         <input
                             className=" h-9"
                             type="text"
-                            placeholder="아이디"
+                            placeholder="이메일"
                         />
                         <input
                             className="h-9"

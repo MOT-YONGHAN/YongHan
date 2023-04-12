@@ -3,7 +3,7 @@ import {
     NAVER_CLIENT_ID,
     NAVER_CLIENT_SECRET,
     NAVER_REDIRECT_URI,
-} from "./oauth";
+} from "./oauth.js";
 
 function NaverLoginButton() {
     const [accessToken, setAccessToken] = useState<string | null>(null);
