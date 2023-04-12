@@ -4,31 +4,31 @@ const detectError = require("../utils/error");
 
 // local - 회원가입
 const signup = catchAsync(async (req, res) => {
-  const { name, nickname, email, password, socialTypeId } = req.body;
+  const { name, nickname, email, password } = req.body;
 
-  if (!name || !nickname || !email || !password || !socialTypeId) {
+  if (!name || !nickname || !email || !password) {
     const error = new Error("KEY_ERROR");
     error.statusCode = 400;
 
     throw error;
   }
-  await userService.signup(name, nickname, email, password, socialTypeId);
+  await userService.signup(name, nickname, email, password);
 
   return res.status(201).json({ message: "USER_CREATED!" });
 });
 
 // local - 로그인
 const signin = catchAsync(async (req, res) => {
-  const { email, password, socialTypeId } = req.body;
+  const { email, password } = req.body;
 
-  if (!email || !password || !socialTypeId) {
+  if (!email || !password) {
     const error = new Error("KEY_ERROR");
     error.statusCode = 400;
 
     throw error;
   }
 
-  jwtToken = await userService.signin(email, password, socialTypeId);
+  jwtToken = await userService.signin(email, password);
 
   return res.status(200).json({ accessToken: jwtToken });
 });

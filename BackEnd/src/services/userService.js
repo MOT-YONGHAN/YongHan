@@ -5,14 +5,8 @@ const axios = require("axios");
 const detectError = require("../utils/error");
 // const { request } = require("express");
 
-const SocialTypeId = Object.freeze({
-  LOCAL: 1,
-  KAKAO: 2,
-  NAVER: 3,
-});
-
 // LOCAL 회원가입
-const signup = async (name, nickname, email, password, socialTypeId) => {
+const signup = async (name, nickname, email, password) => {
   const pwValidation = new RegExp(
     "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})"
   );
@@ -31,8 +25,7 @@ const signup = async (name, nickname, email, password, socialTypeId) => {
     name,
     nickname,
     email,
-    hashedPassword,
-    socialTypeId
+    hashedPassword
   );
 
   return createUser;
@@ -40,8 +33,14 @@ const signup = async (name, nickname, email, password, socialTypeId) => {
 
 const signin = async (email, password) => {
   const hashedPassword = await userDao.getHashedPassword(email);
-  const compare = await bcrypt.hash(password, hashedPassword);
+  if (!hashedPassword) {
+    const error = new Error("PASSWORD_DOES_NOT_MATCH");
+    error.statusCode = 400;
 
+    throw error;
+  }
+
+  const compare = await bcrypt.compare(password, hashedPassword);
   if (!compare) {
     const error = new Error("PASSWORD_DOES_NOT_MATCH");
     error.statusCode = 400;
