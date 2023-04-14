@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CiStar } from "react-icons/ci";
 
 import Img from "../../../assets/images/logo.png";
@@ -8,6 +9,7 @@ function ReviewComment() {
     const commentRate = Array(5).fill(
         <CiStar className="w-[18px] h-[15px] text-black" />,
     );
+
     return (
         <div className="reviewCommentWrapper my-10 border-b border-solid border-slate-300 pb-10">
             <div className="userInfo flex items-center">
