@@ -1,13 +1,22 @@
 const storeDao = require("../models/storeDao");
+// 메인페이지 기본
+const mainPageList = async (sort) => {
+  return await storeDao.mainPageList(sort);
+};
 
-const storeList = async () => {};
+// 메인페이지 카테고리
+
+const mainPageCategory = async (categoryId, sort) => {
+  return storeDao.storeListForMainPage(categoryId, sort);
+};
 
 const storeDetails = async (storeId) => {
-  const details = await storeDao.storeDetails(storeId);
-  return details;
+  const result = await storeDao.storeDetails(storeId);
+  return result;
 };
 
 module.exports = {
-  storeList,
+  mainPageList,
+  mainPageCategory,
   storeDetails,
 };
