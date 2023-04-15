@@ -1,4 +1,3 @@
-import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import KakaoButton from "./soicallogin/KakaoButton";
@@ -72,8 +71,6 @@ function FormChange() {
                     </div>
 
                     <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor">
-                        <SiNaver />
-
                         <NaverLoginButton />
                     </div>
                     <KakaoButton />
