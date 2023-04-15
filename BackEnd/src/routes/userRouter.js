@@ -5,7 +5,7 @@ const { validateToken } = require("../utils/auth");
 const userController = require("../controllers/usercontroller");
 
 router.post("/signup", userController.signup);
-router.get("/signin", userController.signin);
+router.post("/signin", userController.signin);
 router.post("/kakao", userController.kakaoLogin);
 // router.post("/naver", userController.naverLogin);
 // router.get("/userInfo", validateToken, userController.userInfo);
