@@ -1,11 +1,5 @@
 const { appDataSource } = require("./appDataSource");
 
-const SocialTypeId = Object.freeze({
-  LOCAL: 1,
-  KAKAO: 2,
-  NAVER: 3,
-});
-
 // local - user인지 확인
 const getUserId = async (email) => {
   return await appDataSource.query(
@@ -22,7 +16,6 @@ const getUserId = async (email) => {
 };
 
 // user - password 생성
-
 const getHashedPassword = async (email) => {
   const [{ password }] = await appDataSource.query(
     `
