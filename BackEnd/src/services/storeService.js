@@ -2,7 +2,7 @@ const storeDao = require("../models/storeDao");
 
 // 메인페이지 기본
 const mainPageList = async (sort) => {
-  return await storeDao.mainPageList(sort);
+  return await storeDao.mainPageList(sort || "new");
 };
 
 // 메인페이지 카테고리

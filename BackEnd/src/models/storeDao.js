@@ -32,19 +32,19 @@ const mainPageCategory = async (categoryId, sort) => {
   try {
     const result = await appDataSource.query(
       `
-    SELECT
-      s.name                   AS name,
-      s.address                AS address,
-      r.score                  AS score,
-      COUNT(r.id)              AS review_count,
-      s.created_at
-    FROM
-      stores s
-    LEFT JOIN reviews r        ON s.id = r.store_id
-    WHERE s.category_id = ?
-    GROUP BY s.id, r.score
-    ORDER BY ${mainPageSortMethod[sort]}
-    `,
+      SELECT
+        s.name                   AS name,
+        s.address                AS address,
+        r.score                  AS score,
+        COUNT(r.id)              AS review_count,
+        s.created_at
+      FROM
+        stores s
+      LEFT JOIN reviews r        ON s.id = r.store_id
+      WHERE s.category_id = ?
+      GROUP BY s.id, r.score
+      ORDER BY ${mainPageSortMethod[sort]}
+      `,
       [categoryId]
     );
     return result;
