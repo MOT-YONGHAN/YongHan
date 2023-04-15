@@ -1,45 +1,31 @@
 const storeService = require("../services/storeService");
 const { catchAsync } = require("../utils/detectError");
-const { detectError } = require("../utils/detectError");
 
-// 메인페이지 기본
-const mainPageList = catchAsync(async (req, res) => {
-  const { sort } = req.query;
-
-  if (!sort) {
-    const sort = "new";
-    const result = await storeService.mainPageList(sort);
-    return res.status(200).json({ data: result });
-  }
-  const result = await storeService.mainPageList(sort);
-
-  return res.status(200).json({ data: result });
-});
-
-// 메인페이지 카테고리 선택
-const mainPageCategory = catchAsync(async (req, res) => {
+// 메인페이지
+const mainPage = catchAsync(async (req, res) => {
   const { categoryId, sort } = req.query;
 
-  if (!sort) {
-    const sort = "new";
-    const result = await storeService.mainPageCategory(categoryId, sort);
-    return res.status(200).json({ data: result });
+  let result;
+  if (!categoryId) {
+    // 메인페이지 - 기본
+    result = await storeService.mainPageList(sort || "new");
+  } else {
+    // 메인페이지 - 카테고리
+    result = await storeService.mainPage(categoryId, sort || "new");
   }
-  const result = await storeService.mainPageCategory(categoryId, sort);
 
-  return res.status(200).json({ data: result });
+  return res.status(200).json(result);
 });
 
 const storeDetails = catchAsync(async (req, res) => {
-  const { storeId } = req.query;
-  console.log("controller", req.params);
+  const { storeId } = req.params;
+
   const result = await storeService.storeDetails(storeId);
 
-  return res.status(200).json({ data: result });
+  return res.status(200).json(result);
 });
 
 module.exports = {
-  mainPageList,
-  mainPageCategory,
+  mainPage,
   storeDetails,
 };
