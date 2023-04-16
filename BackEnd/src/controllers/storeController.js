@@ -17,6 +17,15 @@ const mainPage = catchAsync(async (req, res) => {
   return res.status(200).json(result);
 });
 
+// 메인페이지 - 좋아요 유저
+const userlike = catchAsync(async (req, res) => {
+  const { userId, storeId } = req.body;
+
+  await storeService.userlike(userId, storeId);
+
+  return res.status(200).json({ message: "좋아요!" });
+});
+
 const storeDetails = catchAsync(async (req, res) => {
   const { storeId } = req.params;
 
@@ -27,5 +36,6 @@ const storeDetails = catchAsync(async (req, res) => {
 
 module.exports = {
   mainPage,
+  userlike,
   storeDetails,
 };
