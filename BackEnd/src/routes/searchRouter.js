@@ -5,7 +5,7 @@ const userController = require("../controllers/usercontroller");
 const searchController = require("../controllers/searchController");
 
 router.post("/signup", userController.signup);
-router.post("/", searchController.search);
+router.get("/", searchController.search);
 
 module.exports = {
   router,
