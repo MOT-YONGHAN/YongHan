@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { SiNaver } from "react-icons/si";
 import {
     NAVER_CLIENT_ID,
     NAVER_CLIENT_SECRET,
     NAVER_REDIRECT_URI,
-} from "./oauth";
+} from "./oauth.js";
 
 function NaverLoginButton() {
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -69,9 +70,15 @@ function NaverLoginButton() {
 
     // 토큰이 없으면 로그인 버튼을 렌더링
     return (
-        <button type="button" onClick={handleLoginClick}>
-            네이버 로그인
-        </button>
+        <div
+            role="button"
+            tabIndex={0}
+            onMouseDown={handleLoginClick}
+            className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor"
+        >
+            <SiNaver />
+            <button type="button">네이버 로그인</button>
+        </div>
     );
 }
 

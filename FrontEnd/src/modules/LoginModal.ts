@@ -5,12 +5,14 @@ interface LoginModalState {
     likemodal: boolean;
     lastestmodal: boolean;
     login: boolean;
+    recomand: boolean;
 }
 const initialState: LoginModalState = {
     ismodal: false,
     likemodal: false,
     lastestmodal: false,
     login: false,
+    recomand: false,
 };
 const loginModalSlice = createSlice({
     name: "loginmodal",
@@ -28,10 +30,13 @@ const loginModalSlice = createSlice({
         login: (state) => {
             return { ...state, login: !state.login };
         },
+        recomand: (state) => {
+            return { ...state, recomand: !state.recomand };
+        },
     },
 });
 
-export const { toggleModal, likeModal, lastestModal, login } =
+export const { toggleModal, likeModal, lastestModal, login, recomand } =
     loginModalSlice.actions;
 export default loginModalSlice.reducer;
 export interface loginRootState {

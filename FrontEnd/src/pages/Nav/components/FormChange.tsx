@@ -1,4 +1,3 @@
-import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import KakaoButton from "./soicallogin/KakaoButton";
@@ -18,16 +17,16 @@ function FormChange() {
     const handleSigup = () => {
         return formhandler && dispatch(toggleModal());
     };
-    // const closeModal = () => {
-    //     loginModal();
-    // };
+    const closeModal = () => {
+        dispatch(login());
+    };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
             <div className="mx-auto w-10/12">
                 <div className="flex justify-between  h-9">
                     <span>로그인</span>
                     <VscClose
-                        // onClick={closeModal}
+                        onClick={closeModal}
                         className="hover:cursor-pointer"
                         size={20}
                     />
@@ -37,7 +36,7 @@ function FormChange() {
                         <input
                             className=" h-9"
                             type="text"
-                            placeholder="아이디"
+                            placeholder="이메일"
                         />
                         <input
                             className="h-9"
@@ -72,13 +71,6 @@ function FormChange() {
                     </div>
 
                     <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor">
-                        {/* <SiNaver />
-                        <button
-                            className="items-center justify-center"
-                            type="button"
-                        >
-                            네이버 로그인
-                        </button> */}
                         <NaverLoginButton />
                     </div>
                     <KakaoButton />
