@@ -21,8 +21,11 @@ function SearchBar() {
     };
 
     return (
-        <div className="columns-auto ">
-            <form className="flex  items-end gap-3 " onSubmit={submitHandler}>
+        <div className="columns-auto relative">
+            <form
+                className="flex  items-center gap-3 "
+                onSubmit={submitHandler}
+            >
                 <input
                     onChange={inputHandler}
                     className="focus:outline-none focus:border-yonghancolor p-2 border-2  rounded-xl w-96 h-10"
@@ -31,7 +34,9 @@ function SearchBar() {
                 />
                 <RxMagnifyingGlass className="cursor-pointer" size={25} />
             </form>
-            <Recomand />
+            <div className="absolute left-0 right-0 top-12">
+                <Recomand />
+            </div>
         </div>
     );
 }
