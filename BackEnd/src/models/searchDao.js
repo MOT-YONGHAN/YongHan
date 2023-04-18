@@ -1,5 +1,12 @@
 const { appDataSource } = require("./appDataSource");
 
+const sortMethod = Object.freeze({
+  new: "s.created_at DESC", // 최신순
+  old: "s.created_at ASC", // 과거순
+  mostReviews: "review_count DESC", // 리뷰 많은 순
+  fewReviews: "review_count ASC", // 리뷰 적은 순
+});
+
 const search = async (search, sort) => {
   return appDataSource.query(
     `
@@ -10,13 +17,13 @@ const search = async (search, sort) => {
       s.price AS price,
       COUNT(r.id) AS review_count
     FROM
-      store s
-    LEFT JOIN review r ON s.id = r.store_id
+      stores s
+    LEFT JOIN reviews r ON s.id = r.store_id
     WHERE
-      s. name LIKE = CONCAT('%', ?, '%')
+      s. name LIKE CONCAT('%', ?, '%')
     GROUP BY
       s.id
-    ORDER BY ${}
+    ORDER BY ${sortMethod[sort]}
     `,
     [`%${search}%`]
   );
