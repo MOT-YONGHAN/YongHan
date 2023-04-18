@@ -11,11 +11,12 @@ const search = async (search, sort) => {
   return appDataSource.query(
     `
     SELECT
-      s.category_id AS category,
-      s.name AS name,
-      s.address AS address,
-      s.price AS price,
-      COUNT(r.id) AS review_count
+      s.id                          AS storeId,
+      s.name                        AS name,
+      s.category_id                 AS categoryId,
+      s.address                     AS address,
+      s.price                       AS price,
+      COUNT(r.id)                   AS review_count
     FROM
       stores s
     LEFT JOIN reviews r ON s.id = r.store_id
