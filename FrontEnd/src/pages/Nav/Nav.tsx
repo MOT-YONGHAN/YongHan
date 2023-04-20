@@ -37,6 +37,9 @@ function Nav() {
         dispatch(login());
         if (formHandler === false) dispatch(toggleModal());
     };
+    const logouthandler = () => {
+        localStorage.removeItem("accessToken");
+    };
     const hadleShowLastest = () => {
         dispatch(lastestModal());
     };
@@ -45,6 +48,9 @@ function Nav() {
         if (likeHandler) dispatch(likeModal());
         dispatch(likeModal());
     };
+
+    // 로컬 스토리지에서 토큰을 가져옴
+    const token = localStorage.getItem("accessToken");
 
     return (
         <div className=" pt-2  pb-2">
@@ -102,13 +108,23 @@ function Nav() {
                         </div>
                     </div>
                     <div className="flex mr-4 w-20 gap-3  ">
-                        <button
-                            className="h-full p-1 hover:border-b-2 border-yonghancolor"
-                            onClick={handleShowLogin}
-                            type="button"
-                        >
-                            로그인
-                        </button>
+                        {token ? (
+                            <button
+                                className="h-full p-1 hover:border-b-2 border-yonghancolor"
+                                onClick={logouthandler}
+                                type="button"
+                            >
+                                로그아웃
+                            </button>
+                        ) : (
+                            <button
+                                className="h-full p-1 hover:border-b-2 border-yonghancolor"
+                                onClick={handleShowLogin}
+                                type="button"
+                            >
+                                로그인
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

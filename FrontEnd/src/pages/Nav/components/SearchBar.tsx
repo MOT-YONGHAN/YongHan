@@ -15,15 +15,15 @@ function SearchBar() {
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(searchInput(e.target.value));
-        fetch(`http://localhost:3000/src/assets/data/search`)
-            .then((response) => response.json())
-            .then((data) => {
-                setRecomands(data);
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        // fetch(`http://localhost:3000/src/assets/data/search`)
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         setRecomands(data);
+        //         console.log(data);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
     };
 
     const submitHandler = (e: { preventDefault: () => void }) => {
@@ -32,9 +32,9 @@ function SearchBar() {
     };
 
     const debounceOnChange = debounce((event) => {
-        submitHandler(event);
+        inputHandler(event);
         console.log("debounce");
-    }, 100);
+    }, 500);
 
     return (
         <div className="columns-auto relative">
@@ -43,7 +43,7 @@ function SearchBar() {
                 onSubmit={debounceOnChange}
             >
                 <input
-                    onChange={inputHandler}
+                    onChange={debounceOnChange}
                     className="focus:outline-none focus:border-yonghancolor p-2 border-2  rounded-xl w-96 h-10"
                     type="search"
                     placeholder="검색어를 입력하세요."
