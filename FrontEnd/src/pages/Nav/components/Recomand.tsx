@@ -12,14 +12,17 @@ function Recomand() {
     const out = useSelector(
         (state: loginRootState) => state.modalReducer.recomand,
     );
-
+    const searchinput = useSelector(
+        (state: loginRootState) => state.searchReducer.input,
+    );
+    console.log(out);
     const dispatch = useDispatch();
     const handleoutClick = () => {
-        dispatch(recomand());
+        return out && dispatch(recomand());
     };
     return (
         <OutsideClick onOutsideClick={handleoutClick}>
-            {out && (
+            {searchinput && out && (
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden w-96">
                     {recommendations.map((recommendation) => (
                         <div
