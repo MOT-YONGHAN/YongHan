@@ -1,5 +1,5 @@
-import { SiNaver } from "react-icons/si";
 import { VscClose } from "react-icons/vsc";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import KakaoButton from "./soicallogin/KakaoButton";
 import NaverLoginButton from "./soicallogin/NaverLoginButton";
@@ -10,6 +10,10 @@ import {
 } from "../../../modules/LoginModal";
 
 function FormChange() {
+    const [loginForm, setLoginForm] = useState({
+        id: "",
+        password: "",
+    });
     const dispatch = useDispatch();
     const formhandler: boolean = useSelector(
         (state: loginRootState) => state.modalReducer.ismodal,
@@ -18,29 +22,50 @@ function FormChange() {
     const handleSigup = () => {
         return formhandler && dispatch(toggleModal());
     };
-    // const closeModal = () => {
-    //     loginModal();
-    // };
+    const closeModal = () => {
+        dispatch(login());
+    };
+    const handleForm = (e: { target: { name: any; value: any } }) => {
+        setLoginForm({
+            ...loginForm,
+            [e.target.name]: e.target.value,
+        });
+        console.log(loginForm);
+    };
+    const handleSubmit = () => {
+        console.log("1");
+        fetch("", {
+            method: "POST",
+            body: JSON.stringify(loginForm),
+        }).then((response) => response.json());
+    };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
             <div className="mx-auto w-10/12">
                 <div className="flex justify-between  h-9">
-                    <span>로그인</span>
+                    {/* 로그인 로직수정 */}
+                    <span role="button" tabIndex={0} onMouseDown={handleSubmit}>
+                        로그인
+                    </span>
                     <VscClose
-                        // onClick={closeModal}
+                        onClick={closeModal}
                         className="hover:cursor-pointer"
                         size={20}
                     />
                 </div>
                 <div className="flex">
-                    <form className="flex flex-col">
+                    <form onSubmit={handleSubmit} className="flex flex-col">
                         <input
+                            onChange={handleForm}
                             className=" h-9"
+                            name="id"
                             type="text"
-                            placeholder="아이디"
+                            placeholder="이메일"
                         />
                         <input
+                            onChange={handleForm}
                             className="h-9"
+                            name="password"
                             type="password"
                             placeholder="비밀번호"
                         />
@@ -72,13 +97,6 @@ function FormChange() {
                     </div>
 
                     <div className="flex items-center justify-center gap-2 w-full bg-yhBlue2 h-10 hover:border-2 hover:cursor-pointer border-yonghancolor">
-                        {/* <SiNaver />
-                        <button
-                            className="items-center justify-center"
-                            type="button"
-                        >
-                            네이버 로그인
-                        </button> */}
                         <NaverLoginButton />
                     </div>
                     <KakaoButton />

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import formReducer from "./form";
 import modalReducer from "./LoginModal";
-import reviewReducer from "./detail";
+import searchReducer from "./search";
 
 const store = configureStore({
-    reducer: { formReducer, modalReducer, reviewReducer },
+    reducer: { formReducer, modalReducer, searchReducer },
 });
 export default store;

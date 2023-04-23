@@ -12,7 +12,7 @@ const SocialTypeId = Object.freeze({
 });
 
 // LOCAL 회원가입
-const signup = async (name, nickname, email, password, socialTypeId) => {
+const signup = async (name, nickname, email, password) => {
   const pwValidation = new RegExp(
     "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})"
   );
@@ -31,8 +31,7 @@ const signup = async (name, nickname, email, password, socialTypeId) => {
     name,
     nickname,
     email,
-    hashedPassword,
-    socialTypeId
+    hashedPassword
   );
 
   return createUser;

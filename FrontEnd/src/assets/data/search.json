@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "storeId": 371,
+            "name": "지인사주타로",
+            "categoryId": 3,
+            "address": "서울 관악구 남부순환로 1594",
+            "price": null,
+            "review_count": "0"
+        },
+        {
+            "storeId": 370,
+            "name": "지인사주타로",
+            "categoryId": 2,
+            "address": "서울 관악구 남부순환로 1594",
+            "price": null,
+            "review_count": "0"
+        }
+    ]
+}

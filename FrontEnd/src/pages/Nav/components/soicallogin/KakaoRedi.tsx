@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { REST_API_KEY, REDIRECT_URI } from "./oauth";
+import { REST_API_KEY, REDIRECT_URI } from "./oauth.js";
 
 export default function KakaoRedi() {
     const location = useLocation();

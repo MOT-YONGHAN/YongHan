@@ -2,10 +2,17 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formAction, RootState } from "../../../../../modules/form";
 
-function Input() {
+type Props = {
+    vaildHandler: (value: string) => void;
+};
+
+function Input({ vaildHandler }: Props) {
     const dispatch = useDispatch();
-    const form = useSelector((state: RootState) => state.formReducer);
+    const form: RootState = useSelector(
+        (state: RootState) => state.formReducer,
+    );
     const [isvaild, setIsvaild] = useState("");
+
     const nicknameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(formAction.nicknameHandler(event.target.value));
     };
@@ -20,6 +27,7 @@ function Input() {
     };
     const isValidpassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsvaild(event.target.value);
+        vaildHandler(event.target.value);
     };
 
     const sendingFormHandler = () => {
@@ -41,6 +49,9 @@ function Input() {
             <label className="flex flex-col" htmlFor="nickname">
                 <div>
                     <span>Nickname</span>
+                    {form.nickname > 10 && (
+                        <span>닉네임은 최대 10글자 입니다!</span>
+                    )}
                 </div>
                 <input
                     name="nickname"
@@ -52,6 +63,7 @@ function Input() {
             </label>
             <label className="flex flex-col" htmlFor="name">
                 Name
+                {form.name > 10 && <span>이름은 최대 10글자 입니다!</span>}
                 <input
                     name="name"
                     type="text"
@@ -64,6 +76,7 @@ function Input() {
             <label className="flex flex-col" htmlFor="email">
                 Email
                 {form.email &&
+                    form.email > 50 &&
                     !(form.email.includes("@") && form.email.includes(".")) && (
                         <span className="isvaild">이메일을 확인하세요!</span>
                     )}
@@ -78,8 +91,13 @@ function Input() {
 
             <label className="flex flex-col gap-1" htmlFor="password">
                 Password
-                {form.password && form.password.length < 8 && (
-                    <span className="isvaild">8자리이상 입력하세요! </span>
+                {!form.password.match(
+                    /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})$/,
+                ) && (
+                    <span className="isvaild">
+                        8자리 이상, 영문 대소문자와 숫자, 특수문자를 모두
+                        포함해야 합니다.
+                    </span>
                 )}
                 <div className="flex flex-col gap-5">
                     <input
@@ -89,7 +107,7 @@ function Input() {
                         type="password"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    {form.vaildPassword && !(form.password === isvaild) && (
+                    {isvaild && !(form.password === isvaild) && (
                         <span className="isvaild">비밀번호가 다릅니다!</span>
                     )}
                     <input
