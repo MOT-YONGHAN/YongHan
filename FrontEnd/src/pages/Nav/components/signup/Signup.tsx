@@ -17,7 +17,7 @@ function Signup() {
     };
 
     const sendingData = () => {
-        fetch("http://172.30.17.172:3000/auth/signup", {
+        fetch("http://192.168.35.155:3000/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,9 +45,9 @@ function Signup() {
                 form.email.length <= 50 &&
                 form.email.includes("@") &&
                 form.email.includes(".") &&
-                // form.password.match(
-                //     /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})$/,
-                // ) &&
+                form.password.match(
+                    /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})$/,
+                ) &&
                 form.password === vaild
             );
         };
@@ -63,7 +63,7 @@ function Signup() {
                 <Input vaildHandler={vaildHandler} />
                 <button
                     onClick={sendingData}
-                    disabled={!isAllValid}
+                    // disabled={!isAllValid}
                     type="submit"
                 >
                     완료
