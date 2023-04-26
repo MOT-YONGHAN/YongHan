@@ -33,20 +33,25 @@ function FormChange() {
         console.log(loginForm);
     };
     const handleSubmit = () => {
-        console.log("1");
-        fetch("", {
-            method: "POST",
-            body: JSON.stringify(loginForm),
-        }).then((response) => response.json());
+        localStorage.setItem("accessToken", "새ㅏ두");
+        // fetch("http://192.168.35.155:3000/auth/signin", {
+        //     method: "POST",
+        //     body: JSON.stringify(loginForm),
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) =>
+        //         localStorage.setItem("accessToken", data.accessToken),
+        //     );
+        // setLoginForm({
+        //     id: "",
+        //     password: "",
+        // });
     };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
             <div className="mx-auto w-10/12">
                 <div className="flex justify-between  h-9">
-                    {/* 로그인 로직수정 */}
-                    <span role="button" tabIndex={0} onMouseDown={handleSubmit}>
-                        로그인
-                    </span>
+                    <span>로그인</span>
                     <VscClose
                         onClick={closeModal}
                         className="hover:cursor-pointer"
@@ -58,6 +63,7 @@ function FormChange() {
                         <input
                             onChange={handleForm}
                             className=" h-9"
+                            value={loginForm.id}
                             name="id"
                             type="text"
                             placeholder="이메일"
@@ -65,12 +71,18 @@ function FormChange() {
                         <input
                             onChange={handleForm}
                             className="h-9"
+                            value={loginForm.password}
                             name="password"
                             type="password"
                             placeholder="비밀번호"
                         />
                     </form>
-                    <div className=" h-auto ml-2 flex content-center hover:cursor-pointer items-center w-1/3 rounded-md text-white bg-yonghancolor">
+                    <div
+                        role="button"
+                        tabIndex={0}
+                        onMouseDown={handleSubmit}
+                        className=" h-auto ml-2 flex content-center hover:cursor-pointer items-center w-1/3 rounded-md text-white bg-yonghancolor"
+                    >
                         <p className="mx-auto ">로그인</p>
                     </div>
                 </div>

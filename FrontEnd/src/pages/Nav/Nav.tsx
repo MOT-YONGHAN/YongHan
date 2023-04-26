@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import SearchBar from "./components/SearchBar";
 import logo from "../../assets/images/logo.png";
@@ -20,6 +21,11 @@ declare global {
 }
 
 function Nav() {
+    const [token, setToken] = useState<string | null>();
+
+    useEffect(() => {
+        setToken(localStorage.getItem("accessToken"));
+    }, [token]);
     const formHandler: boolean = useSelector(
         (state: loginRootState) => state.modalReducer.ismodal,
     );
@@ -48,9 +54,6 @@ function Nav() {
         if (likeHandler) dispatch(likeModal());
         dispatch(likeModal());
     };
-
-    // 로컬 스토리지에서 토큰을 가져옴
-    const token = localStorage.getItem("accessToken");
 
     return (
         <div className=" pt-2  pb-2">
@@ -108,23 +111,25 @@ function Nav() {
                         </div>
                     </div>
                     <div className="flex mr-4 w-20 gap-3  ">
-                        {token ? (
-                            <button
-                                className="h-full p-1 hover:border-b-2 border-yonghancolor"
-                                onClick={logouthandler}
-                                type="button"
-                            >
-                                로그아웃
-                            </button>
-                        ) : (
-                            <button
-                                className="h-full p-1 hover:border-b-2 border-yonghancolor"
-                                onClick={handleShowLogin}
-                                type="button"
-                            >
-                                로그인
-                            </button>
-                        )}
+                        <div className="flex mr-4 w-20 gap-3">
+                            {token ? (
+                                <button
+                                    className="h-full p-1 hover:border-b-2 border-yonghancolor"
+                                    onClick={logouthandler}
+                                    type="button"
+                                >
+                                    로그아웃
+                                </button>
+                            ) : (
+                                <button
+                                    className="h-full p-1 hover:border-b-2 border-yonghancolor"
+                                    onClick={handleShowLogin}
+                                    type="button"
+                                >
+                                    로그인
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
