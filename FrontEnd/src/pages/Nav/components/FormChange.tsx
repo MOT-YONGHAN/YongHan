@@ -1,6 +1,7 @@
 import { VscClose } from "react-icons/vsc";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { tokenHandelr } from "../../../modules/token";
 import KakaoButton from "./soicallogin/KakaoButton";
 import NaverLoginButton from "./soicallogin/NaverLoginButton";
 import {
@@ -25,15 +26,16 @@ function FormChange() {
     const closeModal = () => {
         dispatch(login());
     };
-    const handleForm = (e: { target: { name: any; value: any } }) => {
+    const handleForm = (e: { target: { name: string; value: string } }) => {
         setLoginForm({
             ...loginForm,
             [e.target.name]: e.target.value,
         });
-        console.log(loginForm);
     };
     const handleSubmit = () => {
         localStorage.setItem("accessToken", "새ㅏ두");
+        dispatch(tokenHandelr(localStorage.getItem("accessToken")));
+
         // fetch("http://192.168.35.155:3000/auth/signin", {
         //     method: "POST",
         //     body: JSON.stringify(loginForm),
@@ -46,6 +48,7 @@ function FormChange() {
         //     id: "",
         //     password: "",
         // });
+        dispatch(login());
     };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">

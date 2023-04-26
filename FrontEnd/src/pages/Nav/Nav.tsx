@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { tokenHandelr } from "../../modules/token";
 import Login from "./components/Login";
 import SearchBar from "./components/SearchBar";
 import logo from "../../assets/images/logo.png";
@@ -21,11 +21,8 @@ declare global {
 }
 
 function Nav() {
-    const [token, setToken] = useState<string | null>();
-
-    useEffect(() => {
-        setToken(localStorage.getItem("accessToken"));
-    }, [token]);
+    const tokenReducer = useSelector((state: any) => state.tokenReducer);
+    const tokenTest = tokenReducer.token;
     const formHandler: boolean = useSelector(
         (state: loginRootState) => state.modalReducer.ismodal,
     );
@@ -45,6 +42,8 @@ function Nav() {
     };
     const logouthandler = () => {
         localStorage.removeItem("accessToken");
+        dispatch(tokenHandelr(null));
+        console.log("tokrn", tokenTest);
     };
     const hadleShowLastest = () => {
         dispatch(lastestModal());
@@ -112,7 +111,7 @@ function Nav() {
                     </div>
                     <div className="flex mr-4 w-20 gap-3  ">
                         <div className="flex mr-4 w-20 gap-3">
-                            {token ? (
+                            {tokenTest ? (
                                 <button
                                     className="h-full p-1 hover:border-b-2 border-yonghancolor"
                                     onClick={logouthandler}
