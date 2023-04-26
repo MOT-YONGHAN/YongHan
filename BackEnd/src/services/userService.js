@@ -2,11 +2,6 @@ const userDao = require("../models/userDao");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
-const SocialTypeId = Object.freeze({
-  LOCAL: 1,
-  KAKAO: 2,
-  NAVER: 3,
-});
 
 // LOCAL 회원가입
 const signup = async (name, nickname, email, password) => {
