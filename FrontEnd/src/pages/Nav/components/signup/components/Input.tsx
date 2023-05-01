@@ -91,7 +91,7 @@ function Input({ vaildHandler }: Props) {
 
             <label className="flex flex-col gap-1" htmlFor="password">
                 Password
-                {!form.password.match(
+                {form.password.match(
                     /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,20})$/,
                 ) && (
                     <span className="isvaild">
