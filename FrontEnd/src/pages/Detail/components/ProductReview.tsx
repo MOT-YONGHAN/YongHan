@@ -6,7 +6,7 @@ import {
     RootState,
     commentHandler,
     updateTimeHandler,
-} from "/src/modules/detail.ts";
+} from "../../../modules/detail";
 
 function ProductReview() {
     const [clicked, setClicked] = useState([false, false, false, false, false]);
@@ -23,7 +23,7 @@ function ProductReview() {
 
     const dispatch = useDispatch();
 
-    const userReview = useSelector((state: RootState) => state.reviewReducer);
+    const userReview = useSelector((state: RootState) => state.detailReducer);
 
     const [reviewTextLength, setReviewTextLength] = useState("");
 
@@ -41,6 +41,11 @@ function ProductReview() {
 
                 "Content-Type": "application/json;charset=utf-8",
             },
+            body: JSON.stringify({
+                rateScore: score,
+                reviewComment: userReview.reviewComment,
+                upDateTime: userReview.upDateTime,
+            }),
         }).then((response) => response.json());
     };
 
