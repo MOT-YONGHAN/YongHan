@@ -51,6 +51,7 @@ function FormChange() {
             })
             .catch((error) => console.error(error));
         // dispatch(login());
+        closeModal();
     };
     return (
         <div className="fixed top-24 right-5  border-2 border-yonghancolor rounded-xl z-10  pt-6  max-md:w-3/6  w-[350px] overflow-hidden">
