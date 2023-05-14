@@ -8,7 +8,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint", "prettier", "import", "react-hooks"],
     parserOptions: {
-        project: ["./tsconfig.json", "postcss.config.js", "tailwind.config.js"],
+        project: ["./tsconfig.json", "tailwind.config.js"],
     },
     ignorePatterns: [".eslintrc.js", "postcss.config.js"],
     extends: [
@@ -46,7 +46,7 @@ module.exports = {
             2,
             { extensions: [".js", ".jsx", ".ts", ".tsx"] },
         ],
-        "jsx-a11y/no-noninteractive-element-interactions": 0,
+        // "jsx-a11y/no-noninteractive-element-interactions": 0,
         "@typescript-eslint/explicit-module-boundary-types": 0,
     },
     settings: {

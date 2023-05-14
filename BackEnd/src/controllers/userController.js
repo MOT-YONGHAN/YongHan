@@ -36,7 +36,6 @@ const signin = catchAsync(async (req, res) => {
 // 카카오 로그인
 const kakaoLogin = catchAsync(async (req, res) => {
   const kakaoToken = req.headers.authorization;
-  // const { socialTypeId } = req.body;
 
   if (!kakaoToken) {
     const error = new Error("NEED_KAKAO_TOKEN");

@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-const reducer = () => {
-    return "test";
-};
+import formReducer from "./form";
+import modalReducer from "./LoginModal";
+import searchReducer from "./search";
+import tokenReducer from "./token";
 
 const store = configureStore({
-    reducer,
+    reducer: { formReducer, modalReducer, searchReducer, tokenReducer },
 });
 export default store;
