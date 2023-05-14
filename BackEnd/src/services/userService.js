@@ -2,8 +2,6 @@ const userDao = require("../models/userDao");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
-const detectError = require("../utils/error");
-// const { request } = require("express");
 
 const SocialTypeId = Object.freeze({
   LOCAL: 1,
@@ -39,8 +37,14 @@ const signup = async (name, nickname, email, password) => {
 
 const signin = async (email, password) => {
   const hashedPassword = await userDao.getHashedPassword(email);
-  const compare = await bcrypt.hash(password, hashedPassword);
+  if (!hashedPassword) {
+    const error = new Error("PASSWORD_DOES_NOT_MATCH");
+    error.statusCode = 400;
 
+    throw error;
+  }
+
+  const compare = await bcrypt.compare(password, hashedPassword);
   if (!compare) {
     const error = new Error("PASSWORD_DOES_NOT_MATCH");
     error.statusCode = 400;
@@ -98,49 +102,50 @@ const kakaoLogin = async (kakaoToken) => {
 };
 
 // 네이버 로그인
-// const naverLogin = async (naverToken) => {
-//   const result = await axios.get("https://openapi.naver.com/v1/nid/me", {
-//     headers: {
-//       Authorization: `Bearer ${naverToken}`,
-//       "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-//     },
-//   });
+const naverLogin = async (naverToken) => {
+  const result = await axios.get("https://openapi.naver.com/v1/nid/me", {
+    headers: {
+      Authorization: `Bearer ${naverToken}`,
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
+  });
 
-//   if (!result) {
-//     const error = new Error("NAVER_TOKEN_ERROR");
-//     error.statusCode = 400;
+  if (!result) {
+    const error = new Error("NAVER_TOKEN_ERROR");
+    error.statusCode = 400;
 
-//     throw error;
-//   }
+    throw error;
+  }
+  console.log("servcie", result);
+  const { data } = result;
+  const socialId = data.response.id;
+  const name = data.response.name;
+  const nickname = data.response.nickname;
+  const email = data.response.email;
+  const socialTypeId = SocialTypeId.NAVER;
 
-//   const { data } = result;
-//   const socialId = data.response.id;
-//   const name = data.response.name;
-//   const nickname = data.response.nickname;
-//   const email = data.response.email;
-//   const socialTypeId = SocialTypeId.NAVER;
+  const userId = await userDao.checkUserById(socialId);
 
-//   const userId = await userDao.checkUserById(socialId);
+  if (!userId) {
+    const newUser = await userDao.createUser(
+      socialId,
+      name,
+      nickname,
+      email,
+      socialTypeId
+    );
 
-//   if (!userId) {
-//     const newUser = await userDao.createUser(
-//       socialId,
-//       name,
-//       nickname,
-//       email,
-//       socialTypeId
-//     );
-
-//     return (accessToken = jwt.sign(
-//       { userId: newUser.insertId },
-//       process.env.JWT_SECRET
-//     ));
-//   }
-//   return (accessToken = jwt.sign({ userId: userId }, process.env.JWT_SECRET));
-// };
+    return (accessToken = jwt.sign(
+      { userId: newUser.insertId },
+      process.env.JWT_SECRET
+    ));
+  }
+  return (accessToken = jwt.sign({ userId: userId }, process.env.JWT_SECRET));
+};
 
 module.exports = {
   signup,
   signin,
   kakaoLogin,
+  naverLogin,
 };

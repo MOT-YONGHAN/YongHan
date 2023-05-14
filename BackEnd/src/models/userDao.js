@@ -22,9 +22,8 @@ const getUserId = async (email) => {
 };
 
 // user - password 생성
-
 const getHashedPassword = async (email) => {
-  const [hashedPassword] = await appDataSource.query(
+  const [{ password }] = await appDataSource.query(
     `
     SELECT
       password
@@ -35,7 +34,7 @@ const getHashedPassword = async (email) => {
     `,
     [email]
   );
-  return hashedPassword;
+  return password;
 };
 
 // local - user 생성
