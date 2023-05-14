@@ -53,7 +53,6 @@ const kakaoLogin = catchAsync(async (req, res) => {
 // 네이버 로그인
 const naverLogin = catchAsync(async (req, res) => {
   const naverToken = req.headers.authorization;
-  console.log(" con", naverToken);
   if (!naverToken) {
     const error = new Error("NEED_NEVER_TOKEN");
     error.statusCode = 400;
