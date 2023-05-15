@@ -1,6 +1,5 @@
 const { detectError } = require("../utils/detectError");
 const { appDataSource } = require("./appDataSource");
-const queryRunner = appDataSource.createQueryRunner();
 
 const sortMethod = Object.freeze({
   new: "s.created_at DESC", // 최신순
