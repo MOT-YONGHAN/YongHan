@@ -1,0 +1,13 @@
+{
+    "data": [
+        {
+            "address": "서울 관악구 남부순환로 1777-6",
+            "category": 1,
+            "description": "아주 용한 점집입니다. 이것은 설명입니다.",
+            "name": "칠성암",
+            "price": "1000만원",
+            "review_description": null,
+            "score": 2.2
+        }
+    ]
+}
