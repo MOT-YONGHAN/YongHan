@@ -17,7 +17,7 @@ const mainPage = catchAsync(async (req, res) => {
   return res.status(200).json(result);
 });
 
-// 메인페이지 - 좋아요 유저
+// 메인, 상세 페이지 - 좋아요 유저
 const userlike = catchAsync(async (req, res) => {
   const { userId, storeId } = req.body;
 
@@ -26,6 +26,7 @@ const userlike = catchAsync(async (req, res) => {
   return res.status(200).json({ message: "좋아요!" });
 });
 
+// 상세페이지 - 기본
 const storeDetails = catchAsync(async (req, res) => {
   const { storeId } = req.params;
 
