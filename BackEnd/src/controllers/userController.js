@@ -50,22 +50,22 @@ const kakaoLogin = catchAsync(async (req, res) => {
 });
 
 // 네이버 로그인
-// const naverLogin = catchAsync(async (req, res) => {
-//   const naverToken = req.headers.authorization;
+const naverLogin = catchAsync(async (req, res) => {
+  const naverToken = req.headers.authorization;
+  if (!naverToken) {
+    const error = new Error("NEED_NEVER_TOKEN");
+    error.statusCode = 400;
 
-//   if (!naverToken) {
-//     const error = new Error("NEED_NEVER_TOKEN_AND");
-//     error.statusCode = 400;
+    throw error;
+  }
+  const naver_accessToken = await userService.naverLogin(naverToken);
 
-//     throw error;
-//   }
-//   const naver_accessToken = await userService.naverLogin(naverToken);
-
-//   return res.status(200).json({ accessToken: naver_accessToken });
-// });
+  return res.status(200).json({ accessToken: naver_accessToken });
+});
 
 module.exports = {
   signup,
   signin,
   kakaoLogin,
+  naverLogin,
 };
